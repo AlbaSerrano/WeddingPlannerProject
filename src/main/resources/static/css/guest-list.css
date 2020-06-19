@@ -37,17 +37,18 @@
 
 /* 1.1 Animations */
 @-webkit-keyframes counter { 
+	/*When the animation starts*/
 	0% {
 		-webkit-transform: scale(0.2, 0.2);
 		opacity: 0;
 		transform: rotate(-45deg);
 	}
-
+	/*When the animation is in the middle*/
 	50% {
 		opacity: 1;
 		transform: rotate(-45deg);
 	}
-
+	/*When the animation finishes*/
 	100% {
 		-webkit-transform: scale(1.5,1.5);
  		opacity: 0;
