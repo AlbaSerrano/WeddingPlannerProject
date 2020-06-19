@@ -1,0 +1,110 @@
+/***STYLES FOR PAGES ERRORS (403,404,500)***/
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*Apply for all body of the template HTML*/
+body {
+	padding: 0;
+	margin: 0;
+}
+
+/*Container for the message of error*/
+.notfound {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	max-width: 520px;
+	width: 100%;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.notfound-message {
+	position: relative;
+	height: 200px;
+	margin: 0px auto 20px;
+}
+
+.notfound-message h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 236px;
+	font-weight: 200;
+	margin: 0px;
+	color: #211b19;
+	text-transform: uppercase;
+	position: absolute;
+	text-shadow: -3px 2px 2px #ed91c1;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.notfound-message h2 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 25px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #211b19;
+	background: #fff;
+	padding: 10px 5px;
+	display: inline-block;
+	position: absolute;
+	top: 55%;
+	left: 0;
+	right: 0;
+}
+
+.redirect {
+	margin-top: 8%;
+}
+.notfound a {
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	font-weight: 700;
+	text-decoration: none;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 3%;
+	border: 1px solid #000000;
+	background: #ed91c1;
+	font-size: 18px;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+
+.notfound a:hover {
+	color: #ed91c1;
+	background: #211b19;
+}
+
+/*For tablets*/
+@media only screen and (max-width: 767px) {
+	.notfound-message h1 {
+		font-size: 160px;
+	}
+}
+
+/*For mobile devices*/
+@media only screen and (max-width: 480px) {
+	.notfound-message {
+		height: 148px;
+		margin: 0px auto 10px;
+	}
+	.notfound-message h1 {
+		font-size: 60px;
+	}
+	.notfound-message h2 {
+		font-size: 16px;
+	}
+	.notfound a {
+		padding: 7px 15px;
+		font-size: 14px;
+	}
+}

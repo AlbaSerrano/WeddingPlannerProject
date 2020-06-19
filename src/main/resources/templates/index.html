@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Insert the head fragment for the head from the layout template that is in the layout folder -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<!--=== Top image and title ===-->
+	<header>
+		<!-- Center the content and all items using flexbox -->
+		<div
+			class="header-image d-flex align-items-center justify-content-center"
+			th:style="'background-image: url(' + @{/images/index/header-background.jpg} + ');'">
+			<!-- Center the text -->
+			<div class="text-center">
+				<img src="/images/index/wreath-white.svg"
+					class="header-image__wreath header-image__wreath--up mb-1 " />
+				<h1 class="header-image__title u-font-script" data-aos="zoom-in"
+					th:text="${brides.nameBride} + ' & ' + ${brides.nameGroom}"></h1>
+				<img src="/images/index/wreath-white.svg"
+					class="header-image__wreath header-image__wreath--down mt-1" />
+			</div>
+		</div>
+	</header>
+	<!--== End of top image and title ==-->
+
+	<!--=== Desktop navigation ===-->
+	<div class="nav u-border-b-grey">
+		<!-- All the elements of nav in the same row -->
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav-list">
+					<!-- Logo the planner's ring -->
+					<li><img class="m-2" src="/images/logo.png" alt=""></li>
+					<!-- When & Where info link -->
+					<li><a th:href="@{/boda}" class="nav-list__link"
+						th:text="#{text.link.location}"></a></li>
+					<!-- Memories link -->
+					<li><a th:href="@{/galeria}" class="nav-list__link"
+						th:text="#{text.link.gallery}"></a></li>
+					<!-- RSVP link only authorize to user role -->
+					<li sec:authorize="hasRole('ROLE_USER')"><a
+						th:href="@{/invitados/rsvp}" class="nav-list__link"
+						th:text="#{text.link.rsvp}"></a></li>
+					<!--  wedding menu link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/menu}" class="nav-list__link"
+						th:text="#{text.link.menu.wedding}"> </a></li>
+					<!-- List of guests link -->
+					<li sec:authorize="isAuthenticated()"><a
+						th:href="@{/invitados}" class="nav-list__link"
+						th:text="#{text.link.guests}"></a></li>
+					<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/editar-boda}" class="nav-list__link"
+						th:text="#{text.link.edit.wedding}"> </a></li>
+					<!-- Budget wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/presupuesto_boda/}" class="nav-list__link"
+						th:text="#{text.link.budget}"> </a></li>
+					<!-- Link with the authenticated user and the button to logout -->
+					<li sec:authorize="isAuthenticated()" class="dropdown show">
+						<!-- Form to logout -->
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<!-- send the form to the path / logout with the POST method
+							and the CSRF token to log out -->
+							<a onclick="document.getElementById('logoutForm').submit();"
+								type="submit"><span class="text-uppercase mr-2"
+								sec:authentication="name"></span> <ion-icon name="power"
+									class="icon icon--sm icon--black"></ion-icon> </a>
+							<!-- Crsrf token to logout in a safe way-->
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!--== End of desktop navigation ==-->
+
+	<!--=== Mobile navigation ===-->
+	<div class="mobile-nav">
+		<div class="mobile-nav__menu">
+			<!-- js-open-menu to open or close the menu with javascript -->
+			<a href="#" class="js-open-menu"> <!-- Fixed the icon to the top -->
+				<ion-icon name="menu"
+					class="icon--md icon--black fixed-top icon-menu"></ion-icon>
+			</a>
+		</div>
+		<!-- Fixed the list of the menu to the top -->
+		<ul class="mobile-nav-list js-menu fixed-top">
+			<!-- When & Where info link -->
+			<li><a th:href="@{/boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.location}"> </a></li>
+			<!-- Memories link -->
+			<li><a th:href="@{/galeria}" class="mobile-nav-list__link"
+				th:text="#{text.link.gallery}"></a></li>
+			<!-- RSVP link only authorize to user role -->
+			<li sec:authorize="hasRole('ROLE_USER')"><a
+				th:href="@{/invitados/rsvp}" class="mobile-nav-list__link"
+				th:text="#{text.link.rsvp}"></a></li>
+			<!--  wedding menu link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/menu}"
+				class="mobile-nav-list__link" th:text="#{text.link.menu.wedding}">
+			</a></li>
+			<!-- List of guests link -->
+			<li><a th:href="@{/invitados}" class="mobile-nav-list__link"
+				th:text="#{text.link.guests}"></a></li>
+			<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/editar-boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.edit.wedding}"> </a></li>
+			<!-- Budget wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/presupuesto_boda/}" class="mobile-nav-list__link"
+				th:text="#{text.link.budget}">Presupuesto </a></li>
+			<!-- Link with the authenticated user and the button to logout -->
+			<li sec:authorize="isAuthenticated()">
+				<!-- Form to logout -->
+				<form id="logoutForm" th:action="@{/logout}" method="post">
+					<!-- send the form to the path / logout with the POST method
+					and the CSRF token to log out -->
+					<a class="mobile-nav-list__link"
+						onclick="document.getElementById('logoutForm').submit();"
+						type="submit"> <span sec:authentication="name"></span> <ion-icon
+							name="power" class="icon icon--sm icon--white ml-2"></ion-icon>
+					</a>
+					<!-- Crsrf token to logout in a safe way-->
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
+			</li>
+		</ul>
+	</div>
+	<!--== End of mobile navigation ==-->
+
+	<!--=== Intro: About bride & groom. Counter. ===-->
+	<section class="intro" id="intro">
+		<!-- Center the content -->
+		<div class="container">
+			<!-- A row for the title of the section -->
+			<div class="row">
+				<!-- covers the entire width -->
+				<div class="col-md-12">
+					<!-- The title of the intro section -->
+					<h2 class="u-m-b-5 text-center u-font-script"
+						th:text="#{text.title.section.intro}"></h2>
+				</div>
+			</div>
+			<!-- A row for the content of about her and him -->
+			<div class="row">
+				<!-- covers the entire width -->
+				<div class="col-md-12">
+					<!-- The content of the intro section, display flex (≥992px) -->
+					<div class="intro-content d-lg-flex">
+						<!-- Column 1 of 2 -->
+						<div class="intro-content__col">
+							<!-- Image of her -->
+							<div class="intro-content__img">
+								<img th:if="${#strings.length(brides.bridePhoto) > 0}"
+									th:src="@{'/uploads/' + ${brides.bridePhoto}}"
+									data-aos="zoom-in" />
+							</div>
+							<!-- Text about her, appears below of the image -->
+							<div
+								class="intro-content__text u-bg-about-brides d-flex align-items-center">
+								<!-- this section show with flip-left effect -->
+								<div>
+									<h4 th:text="'Sobre ' +  ${brides.nameBride}"></h4>
+									<p th:text="${brides.aboutHer}"></p>
+								</div>
+							</div>
+						</div>
+						<!-- Heart icon for the center -->
+						<ion-icon name="heart" class="icon--xl icon--white icon--heart"></ion-icon>
+						<!-- Column 2 of 2 -->
+						<div class="intro-content__col">
+							<!-- Image of him -->
+							<div class="intro-content__img">
+								<img th:if="${#strings.length(brides.groomPhoto) > 0}"
+									th:src="@{'/uploads/' + ${brides.groomPhoto}}"
+									data-aos="zoom-in" />
+							</div>
+							<!-- Text about her, appears below of the image -->
+							<div
+								class="intro-content__text u-bg-about-brides d-flex align-items-center">
+								<!-- this section show with flip-left effect -->
+								<div>
+									<h4 th:text="'Sobre ' + ${brides.nameGroom}"></h4>
+									<p th:text="${brides.aboutHim}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- A row for the countdown of the wedding -->
+			<div class="row">
+				<!-- Move columns to the right using .offset classes -->
+				<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+					<!-- Counter. Set the date here as data-date="yyyy/mm/dd" -->
+					<ul class="counter-list js-counter"
+						th:data-date="${brides.weddingDate}">
+						<!-- 4 li to show days, hours, minutes and seconds left for the date -->
+						<li class="counter-list__item"><span class="js-counter-days"></span>
+							<!-- Days text i18n -->
+							<p th:text="#{text.counter.days}"></p> <ion-icon name="heart"
+								class="icon icon--sm icon--primary"></ion-icon></li>
+						<li class="counter-list__item"><span class="js-counter-hours"></span>
+							<!-- Hours text i18n -->
+							<p th:text="#{text.counter.hours}"></p> <ion-icon name="heart"
+								class="icon icon--sm icon--primary"></ion-icon></li>
+						<li class="counter-list__item"><span
+							class="js-counter-minutes"></span> <!-- Minutes text i18n -->
+							<p th:text="#{text.counter.minutes}"></p> <ion-icon name="heart"
+								class="icon icon--sm icon--primary"></ion-icon></li>
+						<li class="counter-list__item"><span
+							class="js-counter-seconds"></span> <!-- Seconds text i18n -->
+							<p th:text="#{text.counter.seconds}"></p></li>
+					</ul>
+					<!-- end of counter -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--== End of intro section. ==-->
+
+	<!--=== Out story timeline ===-->
+	<section class="story u-bg-grey" id="story">
+		<!-- To center the content -->
+		<div class="container">
+			<!-- A row for the title of the section -->
+			<div class="row">
+				<div class="col-sm-12">
+					<h2 class="u-m-t-3 u-font-script text-center"
+						th:text="#{text.our.history.title}"></h2>
+				</div>
+			</div>
+			<!-- A row for the content of the section -->
+			<div class="row">
+				<!-- Move columns to the right using .offset classes -->
+				<div class="col-lg-10 offset-lg-1">
+					<!-- The content of the story, display flex -->
+					<div class="story-timeline d-md-flex">
+						<!-- Story timeline: left column -->
+						<div class="story-timeline__col story-timeline__col--left">
+							<!-- Display the text of the first time we meet with zoom-in-right effect -->
+							<div class="story-timeline__text" data-aos="zoom-in-right">
+								<!-- First time title i18n -->
+								<h4>
+									<ion-icon name="heart"
+										class="icon icon--sm icon--primary u-bg-grey d-md-block"></ion-icon>
+									<span th:text="#{text.first.time.title}"></span>
+								</h4>
+								<!-- The text of the first time we meet -->
+								<p th:text="${brides.history.howMeet}"></p>
+							</div>
+							<!-- Display the image of the wedding request with zoom-in-right effect, only if exist the image -->
+							<img data-aos="zoom-in-right"
+								th:if="${#strings.length(brides.history.howMeetPhoto) > 0}"
+								th:src="@{'/uploads/' + ${brides.history.howMeetPhoto}}" />
+							<!-- Only visible on mobile devices -->
+							<!-- Time together content -->
+							<!-- Display the text of the first time we meet with zoom-in-right effect -->
+							<div class="story-timeline__text d-md-none"
+								data-aos="zoom-in-right">
+								<!-- Time together title i18n -->
+								<h4 th:text="#{text.time.together.title}"></h4>
+								<!-- The text of the time together -->
+								<p th:text="${brides.history.timeTogether}"></p>
+							</div>
+							<!-- Only visible on desktop devices -->
+							<!-- Wedding request content -->
+							<!-- Display the text of the wedding request with zoom-in-right effect -->
+							<div class="story-timeline__text d-none d-md-block"
+								data-aos="zoom-in-right">
+								<!-- Wedding request title i18n -->
+								<h4>
+									<ion-icon name="heart"
+										class="icon icon--sm icon--primary u-bg-grey d-none d-md-block"></ion-icon>
+									<span th:text="#{text.wedding.request.title}"></span>
+								</h4>
+								<!-- The text of the wedding request -->
+								<p th:text="${brides.history.weddingRequest}"></p>
+							</div>
+						</div>
+
+						<!-- Story timeline: right column -->
+						<div class="story-timeline__col story-timeline__col--right">
+							<!-- Display the image of the time together with zoom-in-left effect, only if exist the image -->
+							<img data-aos="zoom-in-left"
+								th:if="${#strings.length(brides.history.timeTogetherPhoto) > 0}"
+								th:src="@{'/uploads/' + ${brides.history.timeTogetherPhoto}}" />
+							<!-- Only visible on desktop devices -->
+							<!-- Time together content -->
+							<!-- Display the text of the first time we meet with zoom-in-left effect -->
+							<div class="story-timeline__text d-none d-md-block"
+								data-aos="zoom-in-left">
+								<!-- Time together title i18n -->
+								<h4>
+									<ion-icon name="heart"
+										class="icon icon--sm icon--primary u-bg-grey d-none d-md-block"></ion-icon>
+									<span th:text="#{text.time.together.title}"></span>
+								</h4>
+								<!-- Text of the time together content -->
+								<p th:text="${brides.history.timeTogether}"></p>
+							</div>
+							<!-- Only visible on mobile devices -->
+							<!-- Wedding request content -->
+							<!-- Display the text of the wedding request with zoom-in-right effect -->
+							<div class="story-timeline__text d-md-none"
+								data-aos="zoom-in-left">
+								<!-- Wedding request title i18n -->
+								<h4 th:text="#{text.wedding.request.title}"></h4>
+								<!-- The text of the wedding request -->
+								<p th:text="${brides.history.weddingRequest}"></p>
+							</div>
+							<!-- Display the image of the wedding request with zoom-in-left effect, only if exist the image -->
+							<img
+								th:if="${#strings.length(brides.history.weddingRequestPhoto) > 0}"
+								th:src="@{'/uploads/' + ${brides.history.weddingRequestPhoto}}"
+								data-aos="zoom-in-left" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--== End of our story timeline. ==-->
+
+	<!--=== Bridesmaids & Groomsmen ===-->
+	<section class="friends" id="friends">
+		<!-- Title of the section our family i18n -->
+		<h2 class="u-font-script text-center u-m-b-5"
+			th:text="#{text.our.family.title}"></h2>
+		<!-- The slider for family content -->
+		<ul class="slider-list js-slider">
+			<!-- For each family show the profile photo, the name and relationship -->
+			<li th:each="family : ${families}" class="slider-list__item js-slide"><img
+				th:src="@{'/images/family/' + ${family.profilePhoto}}" />
+				<p class="font-weight-bold" th:text="${family.name}"></p>
+				<p th:text="${family.relationship}"></p></li>
+		</ul>
+		<div class="d-none d-lg-flex slider-arrows js-slider-arrows">
+			<!-- The previous arrow Scalable Vector Graphics -->
+			<span class="slider-arrow js-arrow-prev"> <svg width="40"
+					height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 10">
+					<path fill="none" d="M5 10L1 5l4-5M40 5H1.5" /></svg>
+			</span>
+			<!-- Icon heart on the middle of the arrows -->
+			<ion-icon name="heart" class="icon icon--sm icon--primary"></ion-icon>
+			<!-- The next arrow Scalable Vector Graphics -->
+			<span class="slider-arrow js-arrow-next"> <svg width="40"
+					height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 10">
+					<path fill="none" d="M36 0l4 5-4 5M1 5h38.5" /></svg>
+			</span>
+		</div>
+	</section>
+	<!--== End of bridesmaids & groomsmen. ==-->
+
+	<!-- Insert the footer fragment for the footer from the layout template that is in the layout folder -->
+	<footer th:replace="layout/layout :: footer"></footer>
+
+	<!-- Insert the scripts fragment for the necesary scripts for index from the layout template that is in the layout folder -->
+	<div th:replace="layout/layout :: scripts"></div>
+
+</body>
+</html>

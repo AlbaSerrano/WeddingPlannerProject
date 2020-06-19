@@ -1,0 +1,215 @@
+/*STYLES GENERAL*/
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+body {
+	height: 100%;
+	font-family: 'Pacifico', cursive;
+	background: rgb(135, 128, 101);
+	background: linear-gradient(90deg, rgba(135, 128, 101, 1) 0%,
+		rgba(208, 205, 188, 1) 14%, rgba(232, 230, 222, 1) 32%,
+		rgba(255, 255, 255, 1) 50%, rgba(227, 226, 216, 1) 68%,
+		rgba(208, 205, 188, 1) 86%, rgba(135, 128, 101, 1) 100%);
+}
+
+.top-container {
+	background-color: transparent;
+	padding: 30px;
+	text-align: center;
+}
+
+/*Arrow to scroll top the page*/
+.ir-arriba {
+	display: none;
+	background-repeat: no-repeat;
+	font-size: 20px;
+	color: black;
+	cursor: pointer;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 2;
+}
+
+/* Style the header */
+#formHeader {
+	padding: 10px 16px;
+	background: #fff;
+	opacity: 0.5;
+	border-top: 1px dotted;
+	border-bottom: 1px dotted;
+	width: 100%;
+	display: inline-flex;
+	justify-content: center;
+}
+
+#formHeader div {
+	margin: 0 auto;
+}
+
+/* Page content */
+.content {
+	background: transparent;
+	opacity: 0.8;
+	border-radius: 10px 10px 10px 10px;
+	padding: 16px;
+	width: 80%;
+	height: 100%;
+	margin: 10rem auto;
+	border-radius: 10px 10px 10px 10px;
+	padding: 16px;
+	width: 80%;
+	margin: 10rem auto;
+	box-shadow: 0px 6px 34px 6px rgba(0, 0, 0, 0.75);
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+	position: fixed;
+	top: 0;
+	z-index: 999;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky+.content {
+	margin-top: 300px;
+}
+
+/*====FORM====*/
+#form_wedding input {
+	border: 1px solid black;
+}
+
+#form_wedding textarea {
+	border: 1px solid black;
+}
+
+#form_wedding input:focus {
+	box-shadow: 0px 1px 3px 5px rgba(169, 164, 142, 1);
+	background: white;
+}
+
+#form_wedding textarea:focus {
+	box-shadow: 0px 1px 3px 5px rgba(169, 164, 142, 1);
+}
+
+/*FILES SELECTED*/
+.file-selected{
+	color: #7e7961;
+}
+
+/*PLACEHOLDERS*/
+input:focus::-webkit-input-placeholder {
+	color: transparent;
+}
+textarea:focus::-webkit-input-placeholder {
+	color: transparent;
+}
+
+/*Title for fieldset*/
+legend {
+	text-align: center;
+	margin-bottom: 3rem;
+	border: 2px solid rgba(169, 164, 142, 1);
+}
+
+/*Horizontal line*/
+hr {
+	margin-bottom: 2rem;
+}
+
+/*Font-size for icons of legends*/
+.fa-xs {
+	font-size: 0.8rem;
+}
+
+/*Formgroup of two inputs in the same row*/
+.row-input {
+	margin-right: 4%;
+}
+
+/*Styles for date picker*/
+.date {
+	margin-left: -20px;
+}
+
+/*data-buttonName for all inputs of type file */
+.btn-file {
+	background: white;
+	border: 1px solid;
+}
+
+.btn-file:hover {
+	box-shadow: 0px 1px 3px 5px rgba(169, 164, 142, 1);
+}
+
+/*====BUTTON SUBMIT FORM====*/
+.button_container {
+	margin: 3rem; left : 0;
+	right: 0;
+	left: 0;
+}
+
+/*Style button*/
+.btn-submit {
+	
+	width: 50%;
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	outline: none;
+	overflow: hidden;
+	position: relative;
+	color: #a09a76;
+	font-size: 1rem;
+	border: 2px solid #222;
+	padding: 17px 60px;
+	margin: 0 auto; /*Center the button*/
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+}
+
+/*Style text button*/
+.btn-submit span {
+	position: relative; /*Relative position to the button container*/
+	z-index: 1; /*give the value 1 so that it is above the button*/
+}
+
+/*pseudo-element of submit button*/
+.btn-submit:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 490%;
+	width: 140%;
+	background: #bebd8b;
+	transition: all .5s ease-in-out;
+	transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn-submit:hover:after {
+	transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+
+/*Styles for mobile-devices*/
+@media screen and (max-width: 768px) {
+	/*Submit button*/
+	.btn-submit {
+		width: 90%;
+		padding: 10px;
+	}
+	/*Formgroup of abouthim and abouther*/
+	.row-input {
+		margin-bottom: 3rem;
+	}
+}
+
+/*Styles for the errors menssage of jquery validation*/
+#form_wedding .error {
+	color: #a00e0e;
+	font-size: small;
+}

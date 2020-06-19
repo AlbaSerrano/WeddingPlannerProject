@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{text.application.title}"></title>
+
+<!--***  FONTS for google fonts ***-->
+<link
+	href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+	rel="stylesheet">
+
+<!--*** VENDORS STYLES ***-->
+<!-- Font-awesome plugin -->
+<link rel="stylesheet" th:href="@{/webfonts/css/all.min.css}">
+<!-- Bootstrap plugin -->
+<link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}" />
+
+<!-- *** FAVICON *** -->
+<link rel="shorcut icon" type="image/png" sizes="32x32"
+	th:href="@{/images/favicon.ico}" />
+
+<!--*** OWN STYLES ***-->
+<link rel="stylesheet" th:href="@{/css/form-wedding.css}" />
+<link rel="stylesheet" th:href="@{/css/hearts_animation.css}" />
+
+
+</head>
+<body>
+
+	<!-- Boton hacia arriba -->
+	<a class="ir-arriba" javascript:void(0) title="Volver arriba"> <span
+		class="fa-stack"> <i class="fa fa-circle fa-stack-2x"></i> <i
+			class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+	</span>
+	</a>
+
+	<!-- Top container with the title -->
+	<div class="top-container">
+		<h1 th:text="#{text.form.title1}"></h1>
+		<p th:text="#{text.form.title2}"></p>
+	</div>
+
+	<!-- Header with three images of the brides -->
+	<header id="formHeader">
+		<div>
+			<img class="img-fluid" th:src="@{/images/form-wedding/womens.png}"
+				th:alt="womens.png" />
+		</div>
+		<div>
+			<img class="img-fluid" th:src="@{/images/form-wedding/bridal.png}"
+				th:alt="bridal.png" />
+		</div>
+		<div>
+			<img class="img-fluid" th:src="@{/images/form-wedding/mens.png}" th:alt="mens.png" />
+		</div>
+	</header>
+
+	<!--   Page content -->
+	<div class="card container content">
+		<!-- Card header -->
+		<h3 class="card-header text-center mb-5"
+			th:text="#{text.form.card.header}"></h3>
+		<!-- Card body -->
+		<div class="card-body">
+			<!-- Form-->
+			<form id="form_wedding" name="form_wedding"
+				th:action="@{/crear-boda}" th:object="${brides}" method="post"
+				enctype="multipart/form-data">
+
+				<!-- Fieldset for brides data -->
+				<fieldset>
+					<legend>
+						Datos de l<i class="fa fa-heart fa-xs" aria-hidden="true"></i>s
+						novi<i class="fa fa-heart fa-xs"></i>s
+					</legend>
+					<!-- Tow inputs for brides name in a row -->
+					<div class="form-row names">
+						<label class="col-form-label" th:text="#{text.brides}"></label>
+						<!-- Bride name Input -->
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="nameBride"
+								id="nameBride" th:placeholder="#{text.placeholder.input.names}" />
+						</div>
+						<!-- Groom name Input -->
+						<div class="form-group col-md-4">
+							<input type="text" class="form-control" name="nameGroom"
+								id="nameGroom" th:placeholder="#{text.placeholder.input.names}" />
+						</div>
+					</div>
+
+					<!-- Tow inputs for about her and brideFile in a row -->
+					<div class="form-row mb-5">
+						<!-- About her -->
+						<div class="form-group row-input col-md-5">
+							<label for="aboutHer" class="col-form-label"
+								th:text="#{text.brides.aboutHer}"></label>
+							<textarea class="form-control h-100" name="aboutHer"
+								id="aboutHer"
+								th:placeholder="#{text.placeholder.textarea.about}"></textarea>
+						</div>
+						<!-- Bride's file -->
+						<div class="form-group col-md-4">
+							<label for="brideFile" class="col-form-label"
+								th:text="#{text.brides.file}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="brideFile" id="brideFile" />
+						</div>
+					</div>
+
+					<!-- Tow inputs for about him and groomFile in a row -->
+					<div class="form-row mb-5">
+						<!-- About him -->
+						<div class="form-group row-input col-md-5">
+							<label for="aboutHim" class="col-form-label"
+								th:text="#{text.brides.aboutHim}"></label>
+							<textarea class="form-control h-100" name="aboutHim"
+								id="aboutHim"
+								th:placeholder="#{text.placeholder.textarea.about}"></textarea>
+						</div>
+						<!-- Groom's file -->
+						<div class="form-group col-md-4">
+							<label for="groomFile" class="col-form-label"
+								th:text="#{text.brides.file}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="groomFile" id="groomFile" />
+						</div>
+					</div>
+
+					<!-- Date picker for the weddingDate -->
+					<div class="form-group date col-md-4">
+						<label for="weddingDate" class="col-form-label"
+							th:text="#{text.brides.weddingDate}"></label> <input type="date"
+							class="form-control" name="weddingDate" id="weddingDate">
+					</div>
+				</fieldset>
+				<!-- SEPARATOR HORIZONTAL LINE -->
+				<hr>
+
+				<!-- Fieldset for wedding data -->
+				<fieldset>
+					<!-- Title of the legend -->
+					<legend>
+						Datos de la boda <i class="fa fa-heart fa-xs" aria-hidden="true"></i>
+					</legend>
+
+					<!-- ceremony place input and ceremony file input in same row -->
+					<div class="form-row mb-5">
+						<!-- Ceremony Place -->
+						<div class="form-group row-input col-md-5">
+							<label for="ceremonyPlace" class="col-form-label"
+								th:text="#{text.brides.ceremonyPlace}"></label> <input
+								type="text" class="form-control" name="ceremonyPlace"
+								id="ceremonyPlace"
+								th:placeholder="#{text.placeholder.input.places}" />
+						</div>
+						<!-- Ceremony file -->
+						<div class="form-group col-md-4">
+							<label for="ceremonyFile" class="col-form-label"
+								th:text="#{text.ceremony.file}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="ceremonyFile" id="ceremonyFile" />
+						</div>
+					</div>
+
+					<!-- ceremony description input and ceremony hour input in same row -->
+					<div class="form-row mb-5">
+						<!-- Ceremony description -->
+						<div class="form-group col-md-5 row-input">
+							<label for="ceremonyDescription" class="col-form-label"
+								th:text="#{text.brides.ceremonyDescription}"></label>
+							<textarea class="form-control h-100" name="ceremonyDescription"
+								id="ceremonyDescription"
+								th:placeholder="#{text.placeholder.textarea.ceremony}"></textarea>
+						</div>
+						<!-- Ceremony hour -->
+						<div class="form-group col-md-4">
+							<label for="ceremonyHour" class="col-form-label"
+								th:text="#{text.brides.ceremonyHour}"></label> <input
+								type="time" class="form-control" name="ceremonyHour"
+								id="ceremonyHour" />
+						</div>
+					</div>
+
+					<!-- party place input  and 2 party file input in same row -->
+					<div class="form-row mb-5">
+						<!-- Party place -->
+						<div class="form-group col-md-5 row-input">
+							<label for="partyPlace" class="col-form-label"
+								th:text="#{text.brides.partyPlace}"></label> <input type="text"
+								class="form-control" name="partyPlace" id="partyPlace"
+								th:placeholder="#{text.placeholder.input.places}" />
+						</div>
+						<!-- Party file 1-->
+						<div class="form-group col-md-3">
+							<label for="partyFile1" class="col-form-label"
+								th:text="#{text.party.file1}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="partyFile1" id="partyFile1" />
+						</div>
+
+
+						<!-- Party file 2-->
+						<div class="form-group col-md-3">
+							<label for="partyFile2" class="col-form-label"
+								th:text="#{text.party.file2}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="partyFile2" id="partyFile2" />
+						</div>
+
+					</div>
+
+					<!-- party description input and ceremony party input in same row -->
+					<div class="form-row mb-5">
+						<!-- Party description -->
+						<div class="form-group col-md-5 row-input">
+							<label for="partyDescription" class="col-form-label"
+								th:text="#{text.brides.partyDescription}"></label>
+							<textarea class="form-control h-100" name="partyDescription"
+								id="partyDescription"
+								th:placeholder="#{text.placeholder.textarea.party}"></textarea>
+						</div>
+
+						<!-- Party hour -->
+						<div class="form-group col-md-4">
+							<label for="partyHour" class="col-form-label"
+								th:text="#{text.brides.partyHour}"></label> <input type="time"
+								class="form-control" name="partyHour" id="partyHour" />
+						</div>
+					</div>
+				</fieldset>
+				<!-- SEPARATOR HORIZONTAL LINE -->
+				<hr>
+
+				<!-- Fieldset for wedding data -->
+				<fieldset>
+					<!-- Title of the legend -->
+					<legend>
+						Vuestra historia de amor <i class="fa fa-heart fa-xs"
+							aria-hidden="true"></i>
+					</legend>
+
+					<!-- How meet input and how meet file input -->
+					<div class="form-row mb-5">
+						<!-- How meet -->
+						<div class="form-group col-md-5 row-input">
+							<label for="howMeet" class="col-form-label"
+								th:text="#{text.brides.howMeet}"></label>
+							<textarea class="form-control h-100" name="howMeet" id="howMeet"
+								th:placeholder="#{text.placeholder.textarea.how.meet}"></textarea>
+						</div>
+						<!-- File how meet -->
+						<div class="form-group col-md-3">
+							<label for="howMeetFile" class="col-form-label"
+								th:text="#{text.file.howMeet}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="howMeetFile" id="howMeetFile" required />
+						</div>
+					</div>
+
+					<!-- How meet input and how meet file input -->
+					<div class="form-row mb-5">
+						<!-- Time together -->
+						<div class="form-group col-md-5 row-input">
+							<label for="timeTogether" class="col-form-label"
+								th:text="#{text.brides.timeTogether}"></label>
+							<textarea class="form-control h-100" name="timeTogether"
+								id="timeTogether"
+								th:placeholder="#{text.placeholder.textarea.time.together}"></textarea>
+						</div>
+						<!-- File time together -->
+						<div class="form-group col-md-3">
+							<label for="timeTogetherFile" class="col-form-label"
+								th:text="#{text.file.timeTogether}"></label> <input type="file"
+								class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="timeTogetherFile" id="timeTogetherFile" required />
+						</div>
+					</div>
+
+					<!-- How meet input and how meet file input -->
+					<div class="form-row mb-5">
+						<div class="form-group col-md-5 row-input">
+							<label for="weddingRequest" class="col-form-label"
+								th:text="#{text.brides.weddingRequest}"></label>
+							<textarea class="form-control h-100" name="weddingRequest"
+								id="weddingRequest"
+								th:placeholder="#{text.placeholder.textarea.wedding.request}"></textarea>
+						</div>
+
+						<div class="form-group col-md-3">
+							<label for="howMeetFile" class="col-form-label"
+								th:text="#{text.file.weddingRequest}"></label> <input
+								type="file" class="filestyle" data-buttonText=""
+								data-iconName="fa fa-upload" data-buttonName="btn-file"
+								name="weddingRequestFile" id="weddingRequestFile" required />
+						</div>
+					</div>
+
+				</fieldset>
+				<div class="button_container">
+					<button type="submit" class="btn btn-submit">
+						<i class="fa fa-heart pr-5"></i><span
+							th:text="#{text.form.brides.button }"></span><i
+							class="fa fa-heart pl-5"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+	<!-- Hearts animation -->
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+	<i class="fas fa-heart fa-heart-anim"></i>
+
+	<!-- Import the necessary scripts from the layout-->
+	<div th:replace="layout/layout :: scripts"></div>
+	<!-- Form wedding script -->
+	<script th:src="@{/js/form-wedding.js}"></script>
+
+
+</body>
+</html>

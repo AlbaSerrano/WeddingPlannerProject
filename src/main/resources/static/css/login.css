@@ -1,0 +1,126 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: url(../images/login/background.jpg) no-repeat center center fixed;
+	background-size: cover;
+	font-family: 'Manrope', sans-serif;
+}
+
+/*Contain the modal-content container*/
+.main-section {
+	margin: 0 auto;
+	margin-top: 25%;
+	padding: 0;
+	height: 300px;
+}
+
+/*Contain the image and the form*/
+.modal-content {
+	background-color: transparent;
+	opacity: 0.6;
+	padding: 0 20px;
+	box-shadow: 0px 0px 3px #676c62;
+}
+
+/*Container that contains the company logo*/
+.user-img {
+	margin-top: -70px;
+	margin-bottom: 20px;
+}
+
+/*My company logo*/
+.user-img img {
+	background-color: #fff;
+	width: 50%;
+	height: 100%;
+	box-shadow: 0px 0px 5px #252921;
+	border-radius: 50%;
+	padding: 20px;
+}
+
+/*Form login*/
+#login {
+	margin-top: 2rem;
+}
+
+/*username input*/
+#username {
+	background: none;
+	text-align: center;
+	border: 2px solid #aea931;
+	padding: 10px 10px;
+	width: 250px;
+	outline: none;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+/*username input focus event on the attribute placeholder*/
+#username:focus::placeholder {
+	color: transparent;
+}
+
+/*username input focus event*/
+#username:focus {
+	background: #fff;
+	border-color: #ED91C1;
+}
+
+/*Contain the password input and the eye icon to show the password*/
+#password-group {
+	display: inline-block;
+	border: 2px solid #aea931;
+	border-radius: 24px;
+	padding: 7px;
+}
+
+/*password input*/
+#password {
+	background: none;
+	border: none;
+	text-align: center;
+}
+
+/*Supress the outline of the input*/
+#password:focus {
+	outline: none;
+}
+
+/*Hidden placeholder*/
+#password:focus::placeholder {
+	color: transparent;
+}
+
+/*Login Button*/
+#btn-login {
+	background: none;
+	display: block;
+	margin: 50px auto;
+	text-align: center;
+	border: 2px solid #aea931;
+	padding: 14px 40px;
+	outline: none;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer
+}
+
+/*Hover event for loginn button*/
+#btn-login:hover {
+	background: #aea931
+}
+
+/*Font size to the form icons*/
+.fas {
+	font-size: 1em;
+}
+
+/*Hover event for eye icon*/
+#mostrar:hover {
+	color: #aea931;
+}
+

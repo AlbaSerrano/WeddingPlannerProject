@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Fragment for the head of the index and list_guest pages -->
+<head th:fragment="head">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Title of the website -->
+<title th:text="#{text.application.title}"></title>
+
+<!--===  FONTS ===-->
+<link
+	href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,700,700i"
+	rel="stylesheet">
+
+<!-- ===FAV ICON=== -->
+<link rel="shorcut icon" type="image/png" sizes="32x32"
+	th:href="@{/images/favicon.ico}" />
+
+<!--=== VENDORS STYLES ===-->
+<!-- Fancybox library -->
+<link rel="stylesheet" th:href="@{/css/vendors/jquery.fancybox.min.css}" />
+<!-- Font awesome library -->
+<link rel="stylesheet" th:href="@{/webfonts/css/all.min.css}">
+<!-- Boostrap library -->
+<link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
+<!-- AOS animate on scroll library -->
+<link th:href="@{https://unpkg.com/aos@2.3.1/dist/aos.css}"
+	rel="stylesheet">
+<!-- Slick slider library -->
+<link rel="stylesheet" th:href="@{/css/vendors/slick.css}">
+
+<!-- Data table JQuery plugin css -->
+<link rel="stylesheet"
+	th:href="@{/css/vendors/jquery.dataTables.min.css}" />
+
+<!-- CSS -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+<!-- Default theme -->
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+<!-- === OWN STYLESHEETS=== -->
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<!-- Styles for the list of guests -->
+<link rel="stylesheet" th:href="@{/css/guest-list.css}" />
+
+<!-- Styles for the list of tasks -->
+<link rel="stylesheet" th:href="@{/css/task-list.css}" />
+
+</head>
+<body>
+
+	<!-- Fragment for the footer of the index and list_guest pages -->
+	<!--=== Footer ===-->
+	<footer class="footer u-bg-grey">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="text-center">
+						<h2 class="u-font-script">
+							Os
+							
+							esperamos!<ion-icon name="heart"
+								class="icon icon--md icon--primary animation-pulse ml-3"></ion-icon>
+						</h2>
+						<ul class="footer__social">
+							<!-- set your social profiles URL inside href="link to your profile" -->
+							<li><a
+								th:href="@{https://www.instagram.com/bodasnet/?hl=es}"
+								target="blank"><ion-icon name="logo-instagram"
+										class="icon icon--sm icon--black"></ion-icon></a></li>
+							<li><a
+								th:href="@{https://photos.app.goo.gl/UFKe1hjfb7N9DsLu7}"
+								target="blank"><ion-icon name="images-outline"
+										class="icon icon--sm icon--black"></ion-icon></a></li>
+							<li><a th:href="@{https://www.facebook.com/bodasnet}"
+								target="blank"><ion-icon name="logo-facebook"
+										class="icon icon--sm icon--black"></ion-icon></a></li>
+							<li><a
+								th:href="@{https://www.youtube.com/watch?v=329t4LNjCFI}"
+								target="blank"><ion-icon name="logo-youtube"
+										class="icon icon--sm icon--black"></ion-icon></a></li>
+
+						</ul>
+						<p class="footer__copy">All rights reserved &copy; 2020</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--== End of footer ==-->
+
+	<!-- Fragment for the scripts neccesary of the index and list_guest pages -->
+	<!--=== Scripts ===-->
+	<div th:fragment="scripts">
+
+		<!-- ===SCRIPTS LIBRARIES=== -->
+		<!-- jQuery and Popper first, then Bootstrap JS and finally jquery-ui -->
+		<script th:src="@{/js/vendors/jquery-3.4.1.min.js}"></script>
+		<script th:src="@{/js/vendors/popper.min.js}"></script>
+		<script th:src="@{/js/vendors/bootstrap.min.js}"></script>
+		<script th:src="@{/js/vendors/jquery-ui.min.js}"></script>
+
+		<!-- Images loaded js -->
+		<script
+			src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+		<!-- CountDown Plugin -->
+		<script src="/js/vendors/jquery.countdown.min.js"></script>
+
+		<!-- Mansory layout -->
+		<script
+			src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+		<!-- Ionic icons plugin-->
+		<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+		<!-- Animate On Scroll Library -->
+		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+		<!-- Plugin fancybox -->
+		<script th:src="@{/js/vendors/jquery.fancybox.min.js}"></script>
+
+		<!-- Plugin JQuery Validator -->
+		<script th:src="@{/js/vendors/jquery.validate.min.js}"></script>
+
+		<!-- Plugin JQuery Validator Languaje Spanish-->
+		<script th:src="@{/js/vendors/messages_es.min.js}"></script>
+
+		<!-- plugin for jquery-based component library could Twitter Bootstrap, used to style the file fields of the forms. -->
+		<script type="text/javascript"
+			th:src="@{/js/vendors/bootstrap-filestyle.min.js}"></script>
+
+		<!-- Slick carrousel plugin -->
+		<script th:src="@{/js/vendors/slick.min.js}"></script>
+
+		<!-- Jquery data tables js file -->
+		<script th:src="@{/js/vendors/jquery.dataTables.min.js}"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+		<script
+			th:src="@{https://cdn.jsdelivr.net/jquery.counterup/1.0/jquery.counterup.min.js}"></script>
+
+		<!--====OWN JS FILES===-->
+		<!--JS file with jquery functions to validate forms of wedding-->
+		<script type="text/javascript" th:src="@{/js/form-validation.js}"></script>
+
+		<!-- JS file for index page -->
+		<script th:src="@{/js/script.js}"></script>
+
+
+	</div>
+	<!--== End of scripts ==-->
+
+</body>
+</html>

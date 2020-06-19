@@ -1,0 +1,1088 @@
+/*----------------------------------------------------
+	[Table of contents]
+	1. General
+		1.1 Animations
+		1.2 Icons
+	2. Utilities
+	3. header-image
+	4. Navigation
+		4.1. Mobile navigation
+	5. Intro
+		5.1. Counter
+	6. Story timeline
+	7. Bridesmaids & Groomsmen
+		7.1. Slider
+	8. Quote romantic text
+	9. When & Where
+	10. RSVP
+	11. Memories
+		11.1. Masonry
+	12. Footer
+	13. Qr code menu
+
+----------------------------------------------------*/
+
+/*============== 1. General ==============*/
+@font-face {
+	font-family: 'Noelan Script';
+	src: url('../fonts/noelan/noelan.eot');
+	src: url('../fonts/noelan/noelan.eot?#iefix')
+		format('embedded-opentype'), url('../fonts/noelan/noelan.woff2')
+		format('woff2'), url('../fonts/noelan/noelan.woff') format('woff'),
+		url('../fonts/noelan/noelan.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	height: 100%;
+}
+
+*:focus {
+	outline: none !important;
+}
+
+body {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 18px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: relative; /*is positioned relative to its normal position*/
+	overflow-x: hidden; 
+}
+
+/*Styles for <h>*/
+h1 {
+	font-size: 36px;
+}
+
+h2 {
+	font-size: 32px;
+}
+
+h3 {
+	font-size: 28px;
+}
+
+h4 {
+	font-size: 24px;
+}
+
+h5 {
+	font-size: 20px;
+}
+
+h6 {
+	font-size: 18px;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+/*Responsive images*/
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/*Scalable Vector Graphics*/
+svg {
+	max-width: 100%;
+}
+
+a:hover, a:focus {
+	text-decoration: none;
+}
+
+
+/* 1.1 Animations */
+@-webkit-keyframes pulse {
+    0% {-webkit-transform: scale(0.2, 0.2); opacity: 0;}
+    50% {opacity: 1;}
+    100% {-webkit-transform: scale(1.5, 1.5); opacity: 0;}
+}
+.animation-pulse {
+	animation: pulse 2s ease-out;
+	animation-iteration-count: infinite;
+	opacity: 0;
+}
+
+/* 1.2 Icons */
+.icon {
+	transition: color .4s ease;
+}
+
+.icon--sm {
+	font-size: 20px;
+}
+
+.icon--md {
+	font-size: 30px;
+}
+
+.icon--lg {
+	font-size: 50px;
+}
+
+.icon--xl {
+	font-size: 70px;
+}
+
+.icon--primary {
+	color: #ffd7d7;
+}
+
+.icon--white {
+	color: #fff;
+}
+
+.icon--black {
+	color: #000;
+}
+
+.icon--gold {
+	color: #a6a462;
+}
+
+.icon:hover {
+	color: #a6a462;
+}
+
+.icon--heart:hover{
+	color: pink;
+}
+
+
+/*============== 2. Utilities ==============*/
+
+/* fonts */
+.u-font-script {
+	font-family: 'Noelan Script', serif;
+	word-spacing: 8px;
+}
+
+/* borders */
+.u-border-b-grey {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+/* backgrounds */
+.u-bg-grey {
+	background-color: #fbfbfa;
+}
+
+.u-bg-white {
+	background-color: #fff;
+}
+
+.u-bg-primary {
+	background-color: #ffd7d7;
+}
+
+.u-bg-about-brides {
+	background-color: #f3f0e4;
+}
+
+/* margins */
+.u-m-b-3 {
+	margin-bottom: 30px;
+}
+
+.u-m-b-5 {
+	margin-bottom: 50px;
+}
+
+.u-m-b-8 {
+	margin-bottom: 80px;
+}
+
+.u-m-t-3 {
+	margin-top: -30px;
+}
+
+/*============== 3. header-image ==============*/
+.header-image {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+	padding: 50px 0;
+	color: #fff;
+}
+
+/*Style for views that need a smaller header */
+.header-image--small {
+	padding: 100px 0;
+}
+
+.header-image__title {
+	font-size: 42px;
+}
+
+/*General style for the image of wreath*/
+.header-image__wreath {
+	width: 250px;
+}
+
+/*Style for the top wreath*/
+.header-image__wreath--up {
+	transform: rotate(178deg);
+	-webkit-transform: rotate(178deg);
+	-ms-transform: rotate(178deg);
+	margin-bottom: -6px;
+}
+
+/*Style for the bottom wreath*/
+.header-image__wreath--down {
+	margin-top: -56px;
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.header-image__title {
+		font-size: 52px;
+	}
+}
+
+/* On screens that are 992px or more*/
+@media ( min-width : 992px) {
+	.header-image {
+		min-height: 90vh;
+	}
+	
+	/*Style for views that need a medium header */
+	.header-image--medium {
+		min-height: 70vh;
+	}
+	
+	/*Style for views that need a small header */
+	.header-image--small {
+		min-height: 60vh;
+	}
+	
+	.header-image__wreath {
+		width: 300px;
+	}
+}
+
+/*============== 4. Navigation ==============*/
+/*The desktop menu*/
+.nav {
+	position: sticky; /*For fixed the menu*/
+	display: none; /*For small devices*/
+	background-color: #fff;
+	top: 0; /*Fixed top*/
+	z-index: 999; /*For that it is above all the elements*/
+}
+
+/*The list of the desktop menu*/
+.nav-list {
+	text-align: center;
+}
+
+/*The elements of the list*/
+.nav-list li {
+	display: inline-block; /*display list items horizontally instead of vertically */
+	padding: 0 18px;
+}
+
+.nav-list li img {
+	width: 12rem; /*The logo*/
+}
+
+/*Styles for the links of the menu*/
+.nav-list__link {
+	display: inline-block; /*display list items horizontally instead of vertically */
+	padding: 14px 0;
+	text-transform: uppercase;
+	color: #414141;	
+	letter-spacing: 0.5px;
+	font-size: 16px;
+	border-bottom: 1px solid #fff;
+	transition: all .3s ease;
+	-webkit-transition: all .3s ease;
+}
+
+/*When the user hover,focus and active to the links of the menu*/
+.nav-list__link.active, .nav-list__link:hover, .nav-list__link:focus {
+	border-bottom: 1px solid #000;
+	color: #a6a462;
+}
+
+/*To hide menu desktop and show the menu icon*/
+/* On screens that are 1360px or more*/
+@media ( min-width: 1360px) {
+	.nav{
+	display: block; /*Display in vertical*/
+	}
+	.mobile-nav{
+	display: none;
+	}
+}
+
+/* On screens that are 992px or more*/
+@media ( min-width : 992px) {	
+	.nav-list li {	
+		padding: 0 25px;
+	}
+}
+
+/* Mobile navigation */
+.mobile-nav {
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	top: 0;
+	left: 0;
+	right: 0;
+	background: #fff;
+	text-align: center;
+	z-index: 999; /*For that it is above all the elements*/
+}
+
+/*The menu icon*/
+.mobile-nav__menu {
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	right: 10px;
+	top: 10px;
+}
+
+/*The list of the links of the menu*/
+.mobile-nav-list {
+	background: #000;
+	color: #fff;
+	display: none;
+	padding: 0;
+	width: 90%;
+	opacity: 0.6;
+	max-width: 350px;
+	margin-top: 2rem;
+	list-style: none;
+}
+
+/*The links of the menu*/
+.mobile-nav-list__link {
+	display: block;
+	padding: 14px 0;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 900;
+	border-bottom: 1px solid #9e9e9e;
+}
+
+.mobile-nav-list li:last-of-type .mobile-nav-list__link {
+	border-bottom: 0;
+}
+
+.mobile-nav-list__link:hover {
+	color: #a6a462;
+} 
+
+/*============== 5. Intro ==============*/
+/*Section for the content of about them and the countdown*/
+.intro {
+	margin: 80px 0 120px;
+	width: 100%;
+}
+
+/*The icon of the content about them*/
+.intro-content .icon--heart {
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	z-index: 9; /*For that it is above all the elements*/
+}
+
+/*The container of the text of the about them container */
+.intro-content__text {
+	padding: 30px;
+}
+
+/*The stylest of the text <h4>*/
+.intro-content__text h4 {
+	font-weight: 600;
+	font-style: initial;
+	margin-bottom: 15px;
+}
+
+/*The columns of the intro-content*/
+.intro-content__col {
+	margin: 5px;
+}
+
+/*Styles for the image width and height 100%*/
+.intro-content__img img {
+	width: 100%;
+	height: 100%;
+}
+
+/* On screens that are 992px or more */
+@media ( min-width : 992px) {
+	.intro-content__col {
+		width: 50%;
+		position: relative; /*is positioned relative to its normal position*/
+	}
+	.intro-content__img {
+		height: 360px;
+	}
+	.intro-content__text {
+		padding: 35px 60px;
+	}
+	.intro-content .icon--heart {
+		bottom: 50%;
+	}
+}
+
+/* 5.1. Counter */
+.counter-list {
+	list-style: none;
+	text-align: center;
+	margin-top: 25px;
+}
+
+/*Each item of the list to show the countdown*/
+.counter-list__item {
+	width: 25%; /*25% of the counter-list container */
+	position: relative; /*is positioned relative to its normal position*/
+	float: left; /*The element floats to the left of its container*/
+}
+
+/*Text container to show the days, hours, minutes and seconds*/
+.counter-list__item span {
+	font-size: 32px;
+	margin-bottom: 6px;
+	display: inline-block; /*display list items horizontally instead of vertically */
+}
+
+/*Heart icon*/
+.counter-list__item .icon {
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	right: -10px;
+	top: 27px;
+}
+
+/*The text of the counter*/
+.counter-list__item p {
+	font-size: 22px;
+	font-weight: 300;
+	line-height: 0.5; /*specifies the height of the line text*/
+
+}
+
+/* On screens that are 992px or more*/
+@media ( min-width : 992px) {
+	.counter-list {
+		margin-left: 70px;
+	}
+	.counter-list__item .icon {
+		top: 40%;
+	}
+	.counter-list__item span {
+		font-size: 42px;
+	}
+}
+
+/*============== 6. Story ==============*/
+/*The content of the story section*/
+.story-timeline {
+	padding: 50px 0;
+	position: relative; /*is positioned relative to its normal position*/
+}
+
+/*The text content of each story*/
+.story-timeline__text {
+	padding: 30px 0;
+	position: relative; /*is positioned relative to its normal position*/
+	z-index: 9; /*For that it is above all the elements*/
+}
+
+/*The title of the story-timeline__text container*/
+.story-timeline__text h4 {
+	font-weight: 600;
+	margin-bottom: 15px;
+	position: relative; /*is positioned relative to its normal position*/
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	/*The container of the column*/
+	.story-timeline__col {
+		width: 50%;
+	}
+	/*The style of left the column*/
+	.story-timeline__col--left {
+		padding-right: 45px;
+		position: relative; /*is positioned relative to its normal position*/
+	}
+	/*The text of the left column*/
+	.story-timeline__col--left .story-timeline__text {
+		text-align: right;
+	}
+	/*The style of right the column*/
+	.story-timeline__col--right {
+		padding-left: 45px;
+	}
+	
+	/*The gray line vertical of the story content, inserted after parent element*/
+	.story-timeline__col--left:after {
+		content: "";
+		position: absolute; /*is placed relative to the first main element that has a position other than static*/
+		right: 0;
+		top: 0;
+		width: 1px;
+		height: 100%;
+		background-color: #dfdfdf;
+	}
+	
+	.story-timeline__text {
+		padding: 50px 0;
+	}
+	/*The 3 line horizontal that are together with the titles, inserted before parent element*/
+	.story-timeline__text h4:before {
+		content: "";
+		position: absolute; /*is placed relative to the first main element that has a position other than static*/
+		height: 1px;
+		background: #dfdfdf;
+		left: -33px;
+		width: 26px;
+		top: 14px;
+	}
+	
+	/*The left line horizontal, inserted before parent element */
+	.story-timeline__col--left h4:before {
+		left: auto;
+		right: -33px;
+	}
+	
+	/*The icon heart*/
+	.story-timeline__text .icon {
+		position: absolute; /*is placed relative to the first main element that has a position other than static*/
+		left: -56px;
+		padding: 3px 0;
+		margin-top: 2px;
+		top: 0;
+	}
+	
+	/*The left line horizontal */
+	.story-timeline__col--left .icon {
+		left: auto;
+		right: -55px;
+	}
+}
+
+/* On screens that are 992px or more*/
+@media ( min-width : 992px) {
+	.story-timeline__text h4 {
+		padding-left: 78px;
+	}
+	.story-timeline__col--left h4 {
+		padding-right: 78px;
+	}
+	/*The title of the 3 stories width, inserted before parent element*/
+	.story-timeline__text h4:before {
+		width: 100px;
+	}
+}
+
+/*============== 7. Friends ==============*/
+.friends {
+	margin: 100px 0;
+}
+
+.friends__title {
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+/* On screens that are 992px or more*/
+@media ( min-width : 992px) {
+	.friends {
+		margin: 100px 0;
+	}
+}
+
+/* 7.1. Slider family*/
+/*USE THE PLUGIN SLICK TO MAKE THE SLIDER*/
+/*The list*/
+.slider-list {
+	list-style: none;
+	margin-bottom: 25px;
+}
+
+/*Apply slick jquery plug-in*/
+.slider-list .slick-list {
+	padding-top: 25px !important;
+	/* Because of margin-top: -25 on current slick item */
+}
+
+/*The elements of the list*/
+.slider-list__item {
+	text-align: center;
+	transition: transform .4s ease;
+	-webkit-transition: transform .4s ease; /*Transition of the transform property, ease-> slow start, then fast, then end slowly*/
+}
+
+/*The current element on the slider*/
+.slider-list__item.slick-current {
+	transform: translateY(-25px); /*translate the element vertically upwards 25px*/
+	-webkit-transform: translateY(-25px);
+	-ms-transform: translateY(-25px);
+}
+
+/*Styles for images of each element of the list*/
+.slider-list__item img {
+	width: 92%;
+	max-width: 180px;
+	border-radius: 50%;
+	margin-bottom: 20px;
+	display: inline !important;
+	transition: box-shadow .4s ease; /*Transition for the box-shadow property, ease-> slow start, then fast, then end slowly*/
+	-webkit-transition: box-shadow .4s ease; /*Chrome*/
+}
+
+/*The text of each element of the list*/
+.slider-list__item p {
+	font-size: 20px;
+	margin-bottom: 0px;
+	display: none;
+}
+
+/*Styles for the current image on the slider*/
+.slider-list__item.slick-current img {
+	-webkit-box-shadow: 4px 21px 29px -8px rgba(161, 161, 161, 1); /*Chrome*/
+	-moz-box-shadow: 4px 21px 29px -8px rgba(161, 161, 161, 1); /*Mozilla*/
+	box-shadow: 4px 21px 29px -8px rgba(161, 161, 161, 1);
+}
+
+/*Styles for the current text on the slider*/
+.slider-list__item.slick-current p {
+	display: block; /*Display as a list*/
+}
+
+/*The arrows to do next or previous the slider*/
+.slider-arrows {
+	justify-content: center;
+	cursor: pointer;
+}
+
+/*Hear icon*/
+.slider-arrows .icon {
+	padding: 0 5px;
+	margin-top: 5px;
+}
+
+.slider-arrow svg path {
+	stroke: #b1b1b1; /*The stroke property in CSS is for adding a border to SVG shapes*/
+	transition: stroke .4s ease;
+	-webkit-transition: stroke .4s ease;
+}
+
+/*Hover effect for the arrow svg*/
+.slider-arrow:hover svg path {
+	stroke: #ffd7d7;
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.slider-list__item img {
+		max-width: 200px;
+	}
+}
+
+/*============== 8. Quote romantic text==============*/
+/*The section of the quote text*/
+.quote {
+	padding: 90px 0;
+	position: relative; /*is positioned relative to its normal position*/
+}
+
+/*Styles for the horizontal lines of the section*/
+.quote:before, .quote:after {
+	content: "";
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	width: 100%;
+	height: 1px;
+	background-color: #e5e5e5;
+}
+
+/*The top line */
+.quote:before {
+	top: 10px;
+}
+
+/*The bottom line*/
+.quote:after {
+	bottom: 10px;
+}
+
+/*The text of the quote*/
+.quote__text {
+	font-size: 28px;
+	line-height: 1.5;
+	text-align: center;
+	font-style: initial;
+}
+
+/*============== 9. When & Where ==============*/
+/*The location section*/
+.location {
+	margin: 100px 0;
+}
+
+/*The text container*/
+.location__text {
+	padding: 35px 30px;
+}
+
+/*Hour title*/
+.location__text h6 {
+	color: #5f5f55;
+	font-size: 16px;
+}
+
+/*Place title*/
+.location__text h3 {
+	position: relative; /*is positioned relative to its normal position*/
+	margin-bottom: 35px;
+	font-weight: 600;
+}
+
+/*the horizontal line below the place*/
+.location__text h3:after {
+	content: "";
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	bottom: -8px;
+	left: 0;
+	width: 72px;
+	background: #aeaeae;
+	height: 1px;
+}
+
+/*The container of the image*/
+.location__img {
+	display: block;
+	margin-bottom: 30px;
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.location {
+		margin: 100px 0;
+	}
+}
+
+/* On screens that are 992px or more*/
+@media ( min-width : 992px) {
+	.location__text--sm {
+		max-width: 90%;
+	}
+	.location__img--sm {
+		max-width: 90%;
+	}
+}
+
+/*============== 10. RSVP ==============*/
+/*The section of rsvp*/
+.rsvp {
+	background-image: url("../images/rsvp/rsvp.jpg");
+	/* Change to your RSVP image here */
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 90px 0;
+}
+
+/*The container of the form*/
+.rsvp-box {
+	padding: 50px 30px 60px;
+	position: relative; /*is positioned relative to its normal position*/
+}
+
+/*The main title*/
+.rsvp-box__title {
+	margin-bottom: 20px;
+}
+
+/*Subtitle confirm your attendand*/
+.rsvp-box__subtitle {
+	font-size: 20px;
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.rsvp-box {
+		padding: 50px 40px 110px;
+	}
+}
+
+/* RSVP */
+.rsvp-box .rsvp-form {
+	margin-top: 50px;
+}
+
+.rsvp-form input, .rsvp-form textarea, .rsvp-form select {
+	width: 100%;
+	font-style: initial;
+	color: #1c1c1c;
+	padding: 5px 10px;
+	margin-bottom: 25px;
+	border-radius: 0;
+}
+
+.rsvp-form input, .rsvp-form select {
+	border: 0;
+	border-bottom: 1px solid #898989;
+}
+/*When focus on input the placeholder disappears*/
+.rsvp-form input:focus::placeholder {
+	color: transparent;
+}
+
+/*The select options for attendant*/
+.rsvp-form select {
+	background: none;
+	border-radius: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	color: #5f5f55;
+}
+
+
+#rsvp-form select option:hover, #rsvp-form select option:active {
+	background: red;
+}
+
+/*Button submit*/
+.rsvp-form-submit {
+	display: block;
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	bottom: 0;
+	width: 100%;
+	background-color: #ffd7d7;
+	border: 0;
+	text-transform: uppercase;
+	font-size: 20px;
+	padding: 11px 10px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	cursor: pointer;
+	transition: background-color .3s ease;
+}
+
+/*The hearts icon of the submit button*/
+.rsvp-form-submit .icon {
+	display: none;
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+}
+
+/*Rigth content of the form*/
+.rsvp-form__right {
+	margin-top: 10px;
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.rsvp-form__left {
+		width: 45%;
+	}
+	.rsvp-form__right {
+		width: 49%;
+		margin-top: 0;
+	}
+	.rsvp-form select {
+		margin-bottom: 0;
+	}
+	.rsvp-form-submit {
+		max-width: 300px;
+	}
+	/*apply left only to the first icon*/
+	.rsvp-form-submit .icon:first-of-type {
+		left: 100px;
+	}
+	
+	/*When user hover the button, appears the icons inline*/
+	.rsvp-form-submit:hover .icon {
+		display: inline;
+	}
+}
+
+/*Styles for messages of jquery validation */
+#rsvp-form .error{
+	font-weight: bolder;
+	color: #8080c0;
+}
+
+/*============== 11. Memories ==============*/
+.memories {
+	margin: 100px auto;
+}
+
+.memories__img {
+	border: 10px solid #fbfbfa;
+}
+
+.memories .icon {
+	margin-bottom: 14px;
+	margin-left: 4px;
+}
+
+/* 11.1. Masonry grid */
+.grid-item, .grid-sizer {
+	width: 100%;
+}
+
+/*Container the img and text-card*/
+.grid-item {
+	margin-left: 4rem;
+	margin-bottom: 4%;
+	position: relative; /*is positioned relative to its normal position*/
+	margin-bottom: 4%;	
+}
+
+
+/*Styles for the css efect on the image of the gallery*/
+
+/*Images style*/
+.view img {
+	width: 300px;
+	height: 200px;	
+	position: relative; /*is positioned relative to its normal position*/
+	transition: all 0.4s ease-in-out; /*Effect transition to all properties*/
+}
+
+/*Text card that appear on the hover effect*/
+.view .text-card {
+	width: 300px; /*Same that the image*/
+	height: 200px; /*Same that the image*/
+	position: absolute; /*is placed relative to the first main element that has a position other than static*/
+	overflow: hidden; /*When the page load the text-card is hidden, and show when hover over the image*/
+	top: 0; /*Position top and left to the img*/
+	left: 0; 
+	border: 1px solid #000;
+	background-color: rgba(146, 96, 91, 0.5);
+	opacity: 0;
+	transition: all 0.8s ease-in-out; /*Effect transition to all properties*/
+}
+
+/*Title of text card*/
+.view h2 {
+	text-transform: uppercase;
+	color: #fff;
+	text-align: center;	
+	font-size: 20px;
+	padding: 10px;
+	margin: 20px 0 0 0;
+	opacity: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	margin: 20px 40px 0px 40px;
+	transform: scale(10); /*increase size x 10*/
+	transition: all 0.3s ease-in-out 0.1s;
+}
+
+/*Text of text card*/
+/* will make the description come from the front, zooming out until its original size*/
+.view p {
+	font-family: Georgia, serif;
+	font-style: italic;
+	font-size: 15px;
+	color: #000;
+	padding: 10px 20px 20px;
+	text-align: center;
+	opacity: 0;
+	transform: scale(10);
+	transition: all 0.3s ease-in-out 0.2s;
+}
+
+/*Hover event*/
+.view:hover .text-card {
+	opacity: 1; /*Opacity 100%*/
+}
+
+.view:hover img {
+	transform: scale(0); /*The image disappears*/
+}
+
+.view:hover h2 {
+	opacity: 1; /*Opacity 100%*/
+	transform: scale(1); /*the h2 retains its original size.*/
+	transition-delay: 0.1s; /*Delay the transform 0.1s*/
+}
+
+.view:hover p {
+	opacity: 1; /*Opacity 100%*/
+	transform: scale(1); /*the p retains its original size.*/
+	transition-delay: 0.2s; /*Delay the transform 0.2s*/
+}
+
+/* On screens that are 567px or more*/
+@media ( min-width : 576px) {
+	.grid-item, .grid-sizer {
+		width: 46%;
+		margin: 0 auto; /*To center the content*/
+	}
+	/*Space between the grid item*/
+	.gutter-sizer {
+		width: 4%;
+	}
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.grid-item, .grid-sizer {
+		width: 31.333%;
+	}
+	/*Each item of the grid*/
+	.grid-item {
+		margin-bottom: 3%;
+	}
+	/*Space between the grid item*/
+	.gutter-sizer {
+		width: 3%;
+	}
+}
+
+/*============== 12. Footer ==============*/
+/*Footer section*/
+.footer {
+	padding: 60px 0 20px;
+}
+
+/*Heart icon of text footer*/
+.footer .icon {
+	margin: 0 -2px;
+}
+
+/*Container for the social icons of footer*/
+.footer__social {
+	list-style: none;
+	margin-top: 60px;
+}
+
+/*Styles for the social icons*/
+.footer__social li {
+	display: inline-block; /*display list items horizontally instead of vertically */
+	margin: 0 5px;
+}
+
+/*Styles for the copyright text*/
+.footer__copy {
+	font-size: 16px;
+}
+
+/* On screens that are 768px or more*/
+@media ( min-width : 768px) {
+	.footer {
+		padding: 80px 0 20px;
+	}
+}
+
+/*============== 13. Qr code ==============*/
+.qr {
+	margin: 100px auto;
+}
+.qr img {
+	
+	width: 30%;
+	height: 30%;
+}

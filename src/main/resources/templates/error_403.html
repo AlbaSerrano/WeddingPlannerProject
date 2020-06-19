@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<!-- Page's title -->
+<title th:text="#{text.security.error.403.title}"></title>
+
+<!-- Bootstrap library -->
+<link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
+
+<!-- Own Styles -->
+<link rel="stylesheet" th:href="@{/css/pageErrors.css}">
+
+</head>
+<body>
+
+	<div class="container">
+		<div class="notfound">
+			<div class="notfound-message">
+				<h1>Oops!</h1>
+				<!-- Show the message error 403 Forbidden -->
+				<h2
+					th:text="#{text.security.error.403.message (${#authentication.name})}"></h2>
+			</div>
+			<!-- Redirect to the main page -->
+			<div class="redirect">
+				<a th:href="@{/}" th:utext="#{text.global.back}"></a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

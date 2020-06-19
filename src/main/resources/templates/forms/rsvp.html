@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Insert the head fragment for the head from the layout template that is in the layout folder -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<!--=== Top image and title ===-->
+	<header>
+		<!-- Center the content and all items using flexbox -->
+		<div
+			class="header-image header-image--small d-flex align-items-center justify-content-center"
+			style="background: url(/images/rsvp/head.jpg) no-repeat center center fixed;'">
+			<h1 class="header-image__title u-font-script " data-aos="zoom-in"
+				th:text="#{text.title.rsvp}"></h1>
+		</div>
+	</header>
+	<!--== End of top image and title ==-->
+
+	<!--=== Desktop navigation ===-->
+	<div class="nav u-border-b-grey">
+		<!-- All the elements of nav in the same row -->
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav-list">
+					<!-- Logo the planner's ring -->
+					<li><img class="m-2" src="/images/logo.png" alt=""></li>
+					<!-- Home link -->
+					<li><a href="/" class="nav-list__link fas fa-home"> </a></li>
+					<!-- When & Where info link -->
+					<li><a th:href="@{/boda}" class="nav-list__link"
+						th:text="#{text.link.location}"></a></li>
+					<!-- Memories link -->
+					<li><a th:href="@{/galeria}" class="nav-list__link"
+						th:text="#{text.link.gallery}"></a></li>
+					<!--  wedding menu link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/menu}" class="nav-list__link"
+						th:text="#{text.link.menu.wedding}"> </a></li>
+					<!-- List of guests link -->
+					<li sec:authorize="isAuthenticated()"><a
+						th:href="@{/invitados}" class="nav-list__link"
+						th:text="#{text.link.guests}"></a></li>
+					<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/editar-boda}" class="nav-list__link"
+						th:text="#{text.link.edit.wedding}"></a></li>
+					<!-- Budget wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/presupuesto_boda/}" class="nav-list__link"
+						th:text="#{text.link.budget}"> </a></li>
+					<!-- Link with the authenticated user and the button to logout -->
+					<li sec:authorize="isAuthenticated()" class="dropdown show">
+						<!-- Form to logout -->
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<!-- send the form to the path / logout with the POST method
+							and the CSRF token to log out -->
+							<a onclick="document.getElementById('logoutForm').submit();"
+								type="submit"><span class="text-uppercase mr-2"
+								sec:authentication="name"></span> <ion-icon name="power"
+									class="icon icon--sm icon--black"></ion-icon> </a>
+							<!-- Crsrf token to logout in a safe way-->
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!--== End of desktop navigation ==-->
+
+	<!--=== Mobile navigation ===-->
+	<div class="mobile-nav">
+		<div class="mobile-nav__menu">
+			<!-- js-open-menu to open or close the menu with javascript -->
+			<a href="#" class="js-open-menu"> <!-- Fixed the icon to the top -->
+				<ion-icon name="menu"
+					class="icon--md icon--black fixed-top icon-menu"></ion-icon>
+			</a>
+		</div>
+		<!-- Fixed the list of the menu to the top -->
+		<ul class="mobile-nav-list js-menu fixed-top">
+			<!-- Home link -->
+			<li><a href="/" class="mobile-nav-list__link fas fa-home"> </a></li>
+			<!-- When & Where info link -->
+			<li><a th:href="@{/boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.location}"></a></li>
+			<!-- Memories link -->
+			<li><a th:href="@{/galeria}" class="mobile-nav-list__link"
+				th:text="#{text.link.gallery}"></a></li>
+			<!--  wedding menu link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/menu}"
+				class="mobile-nav-list__link" th:text="#{text.link.menu.wedding}">
+			</a></li>
+			<!-- List of guests link -->
+			<li><a th:href="@{/invitados}" class="mobile-nav-list__link"
+				th:text="#{text.link.guests}"></a></li>
+			<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/editar-boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.edit.wedding}"> </a></li>
+			<!-- Budget wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/presupuesto_boda/}" class="mobile-nav-list__link"
+				th:text="#{text.link.budget}"> </a></li>
+			<!-- Link with the authenticated user and the button to logout -->
+			<li sec:authorize="isAuthenticated()">
+				<!-- Form to logout -->
+				<form id="logoutForm" th:action="@{/logout}" method="post">
+					<!-- send the form to the path / logout with the POST method
+					and the CSRF token to log out -->
+					<a class="mobile-nav-list__link"
+						onclick="document.getElementById('logoutForm').submit();"
+						type="submit"> <span sec:authentication="name"></span> <ion-icon
+							name="power" class="icon icon--sm icon--white ml-2"></ion-icon>
+					</a>
+					<!-- Crsrf token to logout in a safe way-->
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
+			</li>
+		</ul>
+	</div>
+	<!--== End of mobile navigation ==-->
+
+	<!--== End of desktop navigation ==-->
+
+	<!--=== Mobile navigation ===-->
+	<div class="mobile-nav">
+		<div class="mobile-nav__menu">
+			<!-- js-open-menu to open or close the menu with javascript -->
+			<a href="#" class="js-open-menu"> <!-- Fixed the icon to the top -->
+				<ion-icon name="menu"
+					class="icon--md icon--black fixed-top icon-menu"></ion-icon>
+			</a>
+		</div>
+		<!-- Fixed the list of the menu to the top -->
+		<ul class="mobile-nav-list js-menu fixed-top">
+			<li><a th:href="@{/}" class="mobile-nav-list__link fas fa-home">
+			</a></li>
+			<li><a th:href="@{/boda}" class="mobile-nav-list__link">When
+					& Where</a></li>
+			<li><a th:href="@{/galeria}" class="mobile-nav-list__link">Galería</a></li>
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/editar-boda}" class="mobile-nav-list__link">Editar
+					boda</a></li>
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/presupuesto_boda/}" class="mobile-nav-list__link">Presupuesto
+					boda</a></li>
+			<li sec:authorize="isAuthenticated()">
+				<!-- Form to logout -->
+				<form id="logoutForm" th:action="@{/logout}" method="post">
+					<!-- send the form to the path / logout with the POST method
+					and the CSRF token to log out -->
+					<a class="mobile-nav-list__link"
+						onclick="document.getElementById('logoutForm').submit();"
+						type="submit"> <span sec:authentication="name"></span> <ion-icon
+							name="power" class="icon icon--sm icon--white ml-2"></ion-icon>
+					</a>
+					<!-- Crsrf token to logout in a safe way-->
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
+
+			</li>
+		</ul>
+	</div>
+	<!--== End of mobile navigation ==-->
+
+	<!--=== RSVP form ===-->
+	<section class="rsvp" id="rsvp">
+		<!-- Text center -->
+		<div class="container">
+			<div class="row">
+				<!-- Move columns to the right using .offset classes -->
+				<div class="col-xl-10 offset-xl-1">
+					<!-- Container for the form of rsvp -->
+					<div class="rsvp-box u-bg-white">
+						<!-- Center all text -->
+						<div class="text-center">
+							<!-- Title and subtitle of the rsvp form -->
+							<h3 class="rsvp-box__title u-font-script"
+								th:text="#{text.be.our.guest}">be our guest!</h3>
+							<p class="rsvp-box__subtitle" th:text="#{text.please.confirm}"></p>
+						</div>
+						<!-- Form to create a new gest, by action indicate that send it to the uri "/invitados/rsvp" 
+						 and the controller receives the guest and then saves the object
+						 The form is mappd by the object guest that the controller send to the view through the model
+						 with the key ${guest}-->
+						<form method="POST" class="rsvp-form" id="rsvp-form"
+							th:action="@{/invitados/rsvp}" th:object="${guest}">
+							<!-- display flex
+							justify-content-between-> Distribute items evenly
+							The first element at the beginning, the last at the end -->
+							<div class="d-md-flex justify-content-between">
+								<!-- The left content of rsvp -->
+								<div class="rsvp-form__left">
+									<!-- name field -->
+									<div class="rsvp-form-field">
+										<input type="text" name="name" id="name" th:placeholder="#{text.placeholder.name}">
+									</div>
+									<!-- birthDate field -->
+									<div class="rsvp-form-field">
+										<input type="date" name="birthDate" id="birthDate"
+											th:placeholder="#{text.placeholder.birth.date}">
+									</div>
+									<!-- email field -->
+									<div class="rsvp-form-field">
+										<input type="email" name="email" id="email"
+											th:placeholder="#{text.placeholder.email}">
+									</div>
+									<!-- attend field -->
+									<div class="rsvp-form-field">
+										<!-- Select options -->
+										<select name="attend" id="attend">
+											<option value="" disabled selected
+												th:text="#{text.attend.title}"></option>
+											<option th:value="#{text.attend.option1}"
+												th:text="#{text.attend.option1}">Voy a asistir a
+												todo</option>
+											<option th:value="#{text.attend.option2}"
+												th:text="#{text.attend.option2}">Sólo puedo ir a la
+												ceremonia</option>
+											<option th:value="#{text.attend.option3}"
+												th:text="#{text.attend.option3}">Iré después al
+												banquete y la fiesta</option>
+										</select>
+									</div>									
+									<!-- suggestion field -->
+									<div class="rsvp-form-field mt-5">
+										<textarea name="suggestion" id="suggestion"
+											th:placeholder="#{text.placeholder.suggestion}"></textarea>
+									</div>
+								</div>
+								<!-- Right content -->
+								<div class="rsvp-form__right">
+									<div class="rsvp-form-field h-100">
+										<img src="/images/rsvp/love.jpg" alt="" />
+									</div>
+								</div>
+							</div>
+							<!-- Submit button to send the data of the form -->
+							<button id="send-rsvp" type="submit" class="rsvp-form-submit">
+								<ion-icon name="heart"
+									class="icon icon--sm icon--white animation-pulse"></ion-icon>
+								<span th:text="#{text.confirm.submit}"></span>
+								<ion-icon name="heart"
+									class="icon icon--md icon--white animation-pulse"></ion-icon>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--== End of RSVP rsvp-form. ==-->
+
+	<!-- Insert the footer fragment for the footer from the layout template that is in the layout folder -->
+	<footer th:replace="layout/layout :: footer"></footer>
+
+	<!-- Insert the scripts fragment for the necesary scripts for index from the layout template that is in the layout folder -->
+	<div th:replace="layout/layout :: scripts"></div>
+
+
+	<!--Own Script for the counter of number of guests and apply the jquery plugin 'data table' for the table of guests -->
+	<script type="text/javascript" th:src="@{/js/guests-and-tasks.js}"></script>
+
+	<!-- JS file for index page or rsvp form validation -->
+	<script th:src="@{/js/rsvp-validation.js}"></script>
+
+</body>
+</html>

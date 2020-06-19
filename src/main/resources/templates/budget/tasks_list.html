@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Insert the head fragment for the head from the layout template that is in the layout folder -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<!--=== Top image and title ===-->
+	<header>
+		<!-- Center the content and all items using flexbox -->
+		<div
+			class="header-image header-image--medium  d-flex align-items-center justify-content-center"
+			th:style="'background-image: url(' + @{/images/budget/tasks.jpg} + ');'">
+			<h1 class="header-image__title u-font-script text-dark pt-2"
+				data-aos="zoom-in" th:text="#{text.title.page.budget}"></h1>
+		</div>
+	</header>
+	<!--== End of top image and title ==-->
+
+	<!--=== Desktop navigation ===-->
+	<div class="nav u-border-b-grey">
+		<!-- All the elements of nav in the same row -->
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav-list">
+					<!-- Logo the planner's ring -->
+					<li><img class="m-2" src="/images/logo.png" alt=""></li>
+					<!-- Home link -->
+					<li><a href="/" class="nav-list__link fas fa-home"> </a></li>
+					<!-- When & Where info link -->
+					<li><a th:href="@{/boda}" class="nav-list__link"
+						th:text="#{text.link.location}"></a></li>
+					<!-- Memories link -->
+					<li><a th:href="@{/galeria}" class="nav-list__link"
+						th:text="#{text.link.gallery}"></a></li>
+					<!-- RSVP link only authorize to user role -->
+					<li sec:authorize="hasRole('ROLE_USER')"><a
+						th:href="@{/invitados/rsvp}" class="nav-list__link"
+						th:text="#{text.link.rsvp}"></a></li>
+					<!--  wedding menu link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/menu}" class="nav-list__link"
+						th:text="#{text.link.menu.wedding}"> </a></li>
+					<!-- List of guests link -->
+					<li sec:authorize="isAuthenticated()"><a
+						th:href="@{/invitados}" class="nav-list__link"
+						th:text="#{text.link.guests}"></a></li>
+					<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/editar-boda}" class="nav-list__link"
+						th:text="#{text.link.edit.wedding}"></a></li>
+					<!-- Link with the authenticated user and the button to logout -->
+					<li sec:authorize="isAuthenticated()" class="dropdown show">
+						<!-- Form to logout -->
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<!-- send the form to the path / logout with the POST method
+							and the CSRF token to log out -->
+							<a onclick="document.getElementById('logoutForm').submit();"
+								type="submit"><span class="text-uppercase mr-2"
+								sec:authentication="name"></span> <ion-icon name="power"
+									class="icon icon--sm icon--black"></ion-icon> </a>
+							<!-- Crsrf token to logout in a safe way-->
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!--== End of desktop navigation ==-->
+
+	<!--=== Mobile navigation ===-->
+	<div class="mobile-nav">
+		<div class="mobile-nav__menu">
+			<!-- js-open-menu to open or close the menu with javascript -->
+			<a href="#" class="js-open-menu"> <!-- Fixed the icon to the top -->
+				<ion-icon name="menu"
+					class="icon--md icon--black fixed-top icon-menu"></ion-icon>
+			</a>
+		</div>
+		<!-- Fixed the list of the menu to the top -->
+		<ul class="mobile-nav-list js-menu fixed-top">
+			<!-- Home link -->
+			<li><a href="/" class="mobile-nav-list__link fas fa-home"> </a></li>
+			<!-- When & Where info link -->
+			<li><a th:href="@{/boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.location}"></a></li>
+			<!-- Memories link -->
+			<li><a th:href="@{/galeria}" class="mobile-nav-list__link"
+				th:text="#{text.link.gallery}"></a></li>
+			<!-- RSVP link only authorize to user role -->
+			<li sec:authorize="hasRole('ROLE_USER')"><a
+				th:href="@{/invitados/rsvp}" class="mobile-nav-list__link"
+				th:text="#{text.link.rsvp}"></a></li>
+			<!--  wedding menu link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/menu}"
+				class="mobile-nav-list__link" th:text="#{text.link.menu.wedding}">
+			</a></li>
+			<!-- List of guests link -->
+			<li><a th:href="@{/invitados}" class="mobile-nav-list__link"
+				th:text="#{text.link.guests}"></a></li>
+			<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/editar-boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.edit.wedding}"> </a></li>
+			<!-- Link with the authenticated user and the button to logout -->
+			<li sec:authorize="isAuthenticated()">
+				<!-- Form to logout -->
+				<form id="logoutForm" th:action="@{/logout}" method="post">
+					<!-- send the form to the path / logout with the POST method
+					and the CSRF token to log out -->
+					<a class="mobile-nav-list__link"
+						onclick="document.getElementById('logoutForm').submit();"
+						type="submit"> <span sec:authentication="name"></span> <ion-icon
+							name="power" class="icon icon--sm icon--white ml-2"></ion-icon>
+					</a>
+					<!-- Crsrf token to logout in a safe way-->
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
+			</li>
+		</ul>
+	</div>
+	<!--== End of mobile navigation ==-->
+
+	<!-- Container to show the confirm message (i18n) when the user wants to delete a task, by default is hidden -->
+	<div id="delete_task" class="close"
+		th:text="#{text.confirm.delete.task}" style="display: none;"></div>
+
+	<!-- The main content of the page -->
+
+	<div class="container tasks-list mt-5">
+
+		<!-- The table that contains all tasks -->
+		<table class="table table-sm table-hover" id="tasks">
+			<thead>
+				<tr>
+					<!-- Show the name of the columns through the identifier
+					 that are declared in the language messages properties that contain the text in its corresponding language -->
+					<th scope="col" th:text="#{text.task}"></th>
+					<th scope="col" th:text="#{text.budget}"></th>
+					<th scope="col" th:text="#{text.task.delete}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Go through the list of tasks that we receive through the model object with the key 'tasks' -->
+				<tr th:each="item : ${tasks}">
+					<!-- Show the description of the task -->
+					<td th:text="${item.description}"></td>
+					<!-- Show the budget of the task -->
+					<td th:text="${item.budget} + ' €'"></td>
+					<!-- Link to delete the task by pass the id of the actual task selected -->
+					<td><a
+						onclick="return confirm(document.getElementById('delete_task').innerHTML);"
+						th:href="@{/presupuesto_boda/eliminar-tarea/} + ${item.id}"><ion-icon
+								name="trash" class="icon--sm icon--gold icon-task ml-4"></ion-icon></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- Container to show the total of the budget -->
+
+		<div id="total" class="mt-4 row text-center">
+			<h2 class="mr-5" th:text="#{text.total.budget} + ''"></h2>
+			<h2 class="counter" th:text="${total}"></h2>
+		</div>
+
+		<!-- Container to show the title of add a task -->
+		<div class="row mt-5 ml-2">
+			<h2 th:text="#{text.h1.create.task}" class="mr-3"></h2>
+			<ion-icon name="create" class=" icon--md icon--gold mt-1"></ion-icon>
+		</div>
+		<!-- Form to create a new task, that receives the instance of the new task through modelmap
+		and finally with the post method send the new task to the controller -->
+		<form id="form-task" th:action="@{/presupuesto_boda/}"
+			th:object="${task}" method="post" class="form-inline">
+
+			<!-- #{} to reference the identifier that contain the message in the language of the locale -->
+			<!-- Input for the description of the task -->
+
+			<input type="text" class="form-control mb-2 mr-2" name="description"
+				id="description" th:placeholder="#{text.task}" />
+
+			<!-- Input for the budget of the task -->
+			<div class="input-group mb-2 mr-2" id="budget">
+				<input type="number" class="form-control" step=".01" name="budget"
+					id="budget" th:placeholder="#{text.budget}" />
+				<!-- Add to the input the euro symbol -->
+				<div class="input-group-prepend">
+					<div class="input-group-text">€</div>
+				</div>
+			</div>
+			<!-- Button submit the new task -->
+			<button type="submit" class="btn-add-task">
+				<ion-icon name="add-circle" class="icon--md icon--gold icon-task"></ion-icon>
+			</button>
+		</form>
+
+	</div>
+
+
+
+
+	<!-- Insert the footer fragment for the footer from the layout template that is in the layout folder -->
+	<footer th:replace="layout/layout :: footer"></footer>
+
+	<!-- Insert the scripts fragment for the necesary scripts for index from the layout template that is in the layout folder -->
+	<div th:replace="layout/layout :: scripts"></div>
+
+	<!--Own Script for the counter of number of guests and apply the jquery plugin 'data table' for the table of guests -->
+	<script type="text/javascript" th:src="@{/js/guests-and-tasks.js}"></script>
+
+</body>
+
+</html>

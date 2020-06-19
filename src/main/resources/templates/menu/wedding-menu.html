@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Insert the head fragment for the head from the layout template that is in the layout folder -->
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<!--=== Top image and title ===-->
+	<header>
+		<!-- Center the content and all items using flexbox -->
+		<div
+			class="header-image header-image--small d-flex align-items-center justify-content-center"
+			style="background: url(/images/menu/menu-header.jpg) no-repeat center center fixed;'">
+			<h1 class="header-image__title u-font-script text-dark"
+				data-aos="zoom-in" th:text="#{text.title.page.menu}"></h1>
+		</div>
+	</header>
+	<!--== End of top image and title ==-->
+
+
+	<!--=== Desktop navigation ===-->
+	<div class="nav u-border-b-grey">
+		<!-- All the elements of nav in the same row -->
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav-list">
+					<!-- Logo the planner's ring -->
+					<li><img class="m-2" src="/images/logo.png" alt=""></li>
+					<!-- Home link -->
+					<li><a href="/" class="nav-list__link fas fa-home"> </a></li>
+					<!-- When & Where info link -->
+					<li><a th:href="@{/boda}" class="nav-list__link"
+						th:text="#{text.link.location}"></a></li>
+					<!-- Memories link -->
+					<li><a th:href="@{/galeria}" class="nav-list__link"
+						th:text="#{text.link.gallery}"></a></li>
+					<!-- RSVP link only authorize to user role -->
+					<li sec:authorize="hasRole('ROLE_USER')"><a
+						th:href="@{/invitados/rsvp}" class="nav-list__link"
+						th:text="#{text.link.rsvp}"></a></li>
+					<!-- List of guests link -->
+					<li sec:authorize="isAuthenticated()"><a
+						th:href="@{/invitados}" class="nav-list__link"
+						th:text="#{text.link.guests}"></a></li>
+					<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/editar-boda}" class="nav-list__link"
+						th:text="#{text.link.edit.wedding}"> </a></li>
+					<!-- Budget wedding link, only authorize for the user that has the role ADMIN -->
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+						th:href="@{/presupuesto_boda/}" class="nav-list__link"
+						th:text="#{text.link.budget}"> </a></li>
+					<!-- Link with the authenticated user and the button to logout -->
+					<li sec:authorize="isAuthenticated()" class="dropdown show">
+						<!-- Form to logout -->
+						<form id="logoutForm" th:action="@{/logout}" method="post">
+							<!-- send the form to the path / logout with the POST method
+							and the CSRF token to log out -->
+							<a onclick="document.getElementById('logoutForm').submit();"
+								type="submit"><span class="text-uppercase mr-2"
+								sec:authentication="name"></span> <ion-icon name="power"
+									class="icon icon--sm icon--black"></ion-icon> </a>
+							<!-- Crsrf token to logout in a safe way-->
+							<input type="hidden" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!--== End of desktop navigation ==-->
+
+	<!--=== Mobile navigation ===-->
+	<div class="mobile-nav">
+		<div class="mobile-nav__menu">
+			<!-- js-open-menu to open or close the menu with javascript -->
+			<a href="#" class="js-open-menu"> <!-- Fixed the icon to the top -->
+				<ion-icon name="menu"
+					class="icon--md icon--black fixed-top icon-menu"></ion-icon>
+			</a>
+		</div>
+		<!-- Fixed the list of the menu to the top -->
+		<ul class="mobile-nav-list js-menu fixed-top">
+			<!-- Home link -->
+			<li><a href="/" class="mobile-nav-list__link fas fa-home"> </a></li>
+			<!-- When & Where info link -->
+			<li><a th:href="@{/boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.location}"> </a></li>
+			<!-- Memories link -->
+			<li><a th:href="@{/galeria}" class="mobile-nav-list__link"
+				th:text="#{text.link.gallery}"></a></li>
+			<!-- RSVP link only authorize to user role -->
+			<li sec:authorize="hasRole('ROLE_USER')"><a
+				th:href="@{/invitados/rsvp}" class="mobile-nav-list__link"
+				th:text="#{text.link.rsvp}"></a></li>
+			<!-- List of guests link -->
+			<li><a th:href="@{/invitados}" class="mobile-nav-list__link"
+				th:text="#{text.link.guests}"></a></li>
+			<!-- Edit wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/editar-boda}" class="mobile-nav-list__link"
+				th:text="#{text.link.edit.wedding}"> </a></li>
+			<!-- Budget wedding link, only authorize for the user that has the role ADMIN -->
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+				th:href="@{/presupuesto_boda/}" class="mobile-nav-list__link"
+				th:text="#{text.link.budget}">Presupuesto </a></li>
+			<!-- Link with the authenticated user and the button to logout -->
+			<li sec:authorize="isAuthenticated()">
+				<!-- Form to logout -->
+				<form id="logoutForm" th:action="@{/logout}" method="post">
+					<!-- send the form to the path / logout with the POST method
+					and the CSRF token to log out -->
+					<a class="mobile-nav-list__link"
+						onclick="document.getElementById('logoutForm').submit();"
+						type="submit"> <span sec:authentication="name"></span> <ion-icon
+							name="power" class="icon icon--sm icon--white ml-2"></ion-icon>
+					</a>
+					<!-- Crsrf token to logout in a safe way-->
+					<input type="hidden" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" />
+				</form>
+			</li>
+		</ul>
+	</div>
+	<!--== End of mobile navigation ==-->
+
+	<div class="container">
+		<div class="qr text-center">
+			<img th:src="@{/images/menu/qr-code.png}" alt="" />
+		</div>
+	</div>
+
+	<!-- Insert the footer fragment for the footer from the layout template that is in the layout folder -->
+	<footer th:replace="layout/layout :: footer"></footer>
+
+	<!-- Insert the scripts fragment for the necesary scripts for index from the layout template that is in the layout folder -->
+	<div th:replace="layout/layout :: scripts"></div>
+
+</body>
+</html>

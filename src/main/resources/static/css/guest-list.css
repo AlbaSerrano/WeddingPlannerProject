@@ -1,0 +1,98 @@
+/*The container of the table of guests*/
+.guest-list {
+	margin: 100px auto; /*m-top&bottom 100px m-left&right auto to center*/
+}
+
+/*The container of counter*/
+.counter-section {
+	margin: 2% auto;
+	color: #000;
+}
+
+/*The container of the icon of counter*/
+.icon-box {
+	border: 1px solid #000;
+	height: 50px;
+	width: 50px;
+	margin: 0 auto;
+	transform: rotate(45deg);
+}
+
+/*The styles for the icon*/
+.icon-box .icon--md {
+	margin: 10px auto;
+	color: #a6a462;
+}
+
+/*The container of each counter*/
+.counter-box {
+	font-size: 20px;
+	margin: 0 auto;
+}
+
+/*The styles for the <p> that contains the number counter*/
+.counter-box .counter {
+	font-size: 80px;
+}
+
+/* 1.1 Animations */
+@-webkit-keyframes counter { 
+	0% {
+		-webkit-transform: scale(0.2, 0.2);
+		opacity: 0;
+		transform: rotate(-45deg);
+	}
+
+	50% {
+		opacity: 1;
+		transform: rotate(-45deg);
+	}
+
+	100% {
+		-webkit-transform: scale(1.5,1.5);
+ 		opacity: 0;
+		transform: rotate(-45deg);
+	}
+}
+.animation-counter {
+	animation: counter 4s ease-out;
+	animation-iteration-count: infinite;
+	opacity: 0;
+}
+
+/*Hover effect color for the icons trush to delete a guest*/
+.icon-trash:hover {
+	color: #525252;
+}
+
+/* On screens that are 600px or less*/
+@media screen and (max-width: 600px) {
+
+	/*Assign margin top for the counter section*/
+	.counter-section{
+		margin-top: 3rem;
+	}
+	
+	/***Styles for responsive table****/
+	.table {
+		width: 100%;
+	}
+	
+	/*Delete the thead section of the table*/
+	.table thead {
+		display: none;
+	}
+	
+	/*For the firts td of each registry of the table (the name of the guest)*/
+	.table tr td:first-child {
+		background: #f0f0f0;
+		font-weight: bold;
+		font-size: 1.3em;
+	}
+	
+	/*Display the table as a list*/
+	.table tbody td {
+		display: block;
+		text-align: center;
+	}	
+}

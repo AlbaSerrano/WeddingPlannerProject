@@ -1,0 +1,77 @@
+/*Heart icon style left*/
+.fa-heart-anim {
+  font-size: 28px;
+  color: white;
+  position: absolute;
+  bottom: -1800px;
+  animation: heart 6s cubic-bezier(1, 1, 1, 1) infinite;
+  left: 3%;
+}
+
+/*Heart animation*/
+
+@keyframes heart {
+  0% {
+    opacity: 1;
+    color: #909090;
+  }
+  
+  50% {
+    opacity: 1;
+    color: white;
+    font-size: 38px;
+  }
+  80% {
+    
+    
+    opacity: 1;
+    color: white;
+  }
+  
+  100% {
+    bottom: 100%;
+    opacity: 0;
+    color: white;
+  }
+}
+
+
+.fa-heart-anim:nth-child(3n) {
+	
+	left: 3%;
+	animation-delay: 1s;
+}
+
+.fa-heart-anim:nth-child(4n) {
+	left: 3%;
+	animation-delay: 2s;
+}
+
+.fa-heart-anim:nth-child(5n) {
+	left: 3%;
+	animation-delay: 3s;
+}
+
+
+.fa-heart-anim:nth-child(7n) {
+	left: 92%;
+	animation-delay: 0s;
+}
+
+.fa-heart-anim:nth-child(8n) {
+	left: 92%;
+	animation-delay: 1s;
+}
+
+.fa-heart-anim:nth-child(9n) {
+	left: 92%;
+	animation-delay: 2s;
+}
+
+.fa-heart-anim:nth-child(10n) {
+	left: 92%;
+	animation-delay: 3s;
+}
+
+
+

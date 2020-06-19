@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com">
+<head>
+<meta charset="UTF-8" />
+<title th:text="#{text.application.title}"></title>
+
+<!-- ===FONTS=== -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap"
+	rel="stylesheet">
+
+<!-- ===FAV ICON=== -->
+<link rel="shorcut icon" type="image/png" sizes="32x32"
+	th:href="@{/images/favicon.ico}" />
+
+<!--=== VENDORS STYLES ===-->
+<!-- Bootstrap library -->
+<link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
+<!-- JQuery ui library -->
+<link rel="stylesheet" th:href="@{/css/vendors/jquery-ui.min.css}">
+<!-- Animate library -->
+<link rel="stylesheet" th:href="@{/css/vendors/animate.css}">
+<!-- Font awesome library -->
+<link rel="stylesheet" th:href="@{/webfonts/css/all.min.css}">
+
+<!-- OWN STYLESHEETS-->
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+
+</head>
+<body>
+	<!-- Container to center the form -->
+	<div class="modal-dialog text-center">
+		<div class="main-section">
+			<div class="modal-content m-10">
+				<div class="user-img">
+					<img src="/images/logo.png" />
+				</div>
+				<form id="login" class="col-12" th:action="@{/login}" method="post">
+					<div class="form-group" id="user-group">
+
+						<input type="text" id="username" name="username"
+							class="fas fa-user fa-lg"
+							th:placeholder="'&#xf007; ' + #{text.login.username}" required>
+					</div>
+					<div class="form-group" id="password-group">
+						<input class="fas fa-key fa-lg" type="password" id="password"
+							name="password"
+							th:placeholder="'&#xf084; ' + #{text.login.password}" required>
+						<i class="fa fa-eye" id="mostrar"></i>
+					</div>
+					<div>
+						<small class="text text-danger" id="loginError"
+							th:if="${err!=null}" th:text="${err}"></small>
+					</div>
+
+					<input type="submit" class="fas fa-sign-in-alt fa-lg"
+						th:value="'&#xf2f6; '" id="btn-login">
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Import the necessary scripts from the layout-->
+	<div th:replace="layout/layout :: scripts"></div>
+
+	<script type="text/javascript">
+		/*When the user click on an input the error message dissapears*/
+		$("input").click(function() {
+			$("#loginError").css("visibility", "hidden");
+		});
+
+		/*When the user focus on the password input change the background and border color*/
+		$("#password").focus(
+				function() {
+					$("#password-group").css("background", "#fff").css(
+							"border-color", "#ED91C1");
+				});
+
+		/*When the user blur on the password input change the background and border color again*/
+		$("#password").blur(
+				function() {
+					$("#password-group").css("background", "transparent").css(
+							"border-color", "#aea931");
+				});
+
+		/*Call to the function showPassword()*/
+		$('#mostrar').click(function() {
+			showPassword();
+		});
+
+		/*When the password is on type password if the eye icon has class fa-eye when
+		the user click on it the password show to the user and the class icon change to fa-eye-slash*/
+		function showPassword() {
+			if ($('#mostrar').hasClass('fa-eye')) {
+				$('#password').removeAttr('type');
+				$('#mostrar').addClass('fa-eye-slash').removeClass('fa-eye');
+			}
+			/*When the password is visivle if the eye icon has class fa-eye-slash when
+			the user click on it the password hidden to the user and the class icon change to fa-eye*/
+			else {
+				//Establecemos el atributo y valor
+				$('#password').attr('type', 'password');
+				$('#mostrar').addClass('fa-eye').removeClass('fa-eye-slash');
+			}
+		}
+	</script>
+
+
+
+</body>
+
+
+</html>

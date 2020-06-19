@@ -1,0 +1,48 @@
+/*Styles for form add task*/
+#form-task {
+	margin-top: 2rem;
+	margin-bottom: 100px;
+}
+
+/*Delete all the styles of the button control*/
+.btn-add-task {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+/*Container for the h2 total budget */
+#total {
+	border: 1px solid #a6a462;
+}
+
+/*Styles for h2 total budget*/
+#total h2 {
+	font-weight: bolder;
+}
+
+/*Width 50% of the container to the input description of task*/
+#description {
+	width: 50%;
+}
+
+/*Width 50% of the container to the input description of task*/
+#budget {
+	width: 20%;
+}
+
+/*Hover effect color for the icons of the task page*/
+.icon-task:hover {
+	color: #525252;
+}
+
+/*Styles for devices with max widh 900 px or less*/
+@media ( max-width : 900px) {
+	#budget {
+		width: 35%;
+	}
+}
