@@ -35,6 +35,16 @@
 	font-size: 80px;
 }
 
+/*The container of the invitation*/
+.invitation {
+	width: 30%;
+}
+
+/*The download icon*/
+.invitation i:hover{
+	color: #a6a462;
+}
+
 /* 1.1 Animations */
 @-webkit-keyframes counter { 
 	/*When the animation starts*/

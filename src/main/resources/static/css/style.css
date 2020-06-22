@@ -143,6 +143,10 @@ a:hover, a:focus {
 	color: #a6a462;
 }
 
+.icon--granite {
+	color: #800000;
+}
+
 .icon:hover {
 	color: #a6a462;
 }

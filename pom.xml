@@ -32,6 +32,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- External tomcat -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 
 		<!-- CORE de spring boot starter security -->
 		<dependency>
@@ -134,4 +141,5 @@
 		</plugins>
 	</build>
 
+	<packaging>war</packaging>
 </project>

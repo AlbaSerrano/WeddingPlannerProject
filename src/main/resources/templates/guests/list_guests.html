@@ -171,8 +171,15 @@
 	</div>
 
 	<!-- Only the user with USER role can view the table of confirmed guests -->
-	<div sec:authorize="hasRole('ROLE_USER')" class="container">
-		<img th:src="@{/images/guests/guests-image.jpg}" alt="" />
+	<div sec:authorize="hasRole('ROLE_USER')" class="container invitation">
+		<img class="mt-5" th:src="@{/images/guests/invitation.jpeg}" alt="" />
+		<div class="text-center mt-5 mb-5">
+			<a class="text-dark" th:href="@{/images/guests/invitation.jpeg}"
+				th:download="#{text.download.invitation}"> <i
+				class="fas fa-download mr-3"></i><span
+				th:text="#{text.link.download.invitation}"></span>
+			</a>
+		</div>
 	</div>
 
 	<!-- Only the user with ADMIN role can view the table of confirmed guests -->
@@ -182,12 +189,13 @@
 			<!-- Names of colum -->
 			<thead>
 				<tr>
-				<!-- The text of the columns i18N -->
-					<th scope="col" th:text="#{text.name}"></th>					
+					<!-- The text of the columns i18N -->
+					<th scope="col" th:text="#{text.name}"></th>
 					<th scope="col" th:text="#{text.email}"></th>
 					<th scope="col" th:text="#{text.attendant}"></th>
 					<th scope="col" th:text="#{text.suggestion}"></th>
-					<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{text.delete.guest}"></th>
+					<th scope="col" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:text="#{text.delete.guest}"></th>
 				</tr>
 			</thead>
 			<!-- fields of object ${guest} -->
@@ -195,7 +203,7 @@
 				<!-- For each guest in the list of guests, that obtains through the model with the key ${guests},
 			 create a column for each property of guest -->
 				<tr th:each="guest : ${guests}">
-					<td th:text="${guest.name}"></td>					
+					<td th:text="${guest.name}"></td>
 					<td th:text="${guest.email}"></td>
 					<td th:text="${guest.attend}"></td>
 					<td th:text="${guest.suggestion}"></td>
